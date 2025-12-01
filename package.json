@@ -1,7 +1,33 @@
 {
   "name": "soff-monorepo",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
+  "description": "A collection of lightweight, tree-shakeable TypeScript utilities for common business logic in LATAM",
+  "keywords": [
+    "typescript",
+    "utilities",
+    "latam",
+    "monorepo",
+    "tree-shakeable",
+    "date",
+    "holidays",
+    "validation",
+    "id",
+    "mask",
+    "money",
+    "currency"
+  ],
+  "homepage": "https://github.com/bledxs/soff-monorepo#readme",
+  "bugs": {
+    "url": "https://github.com/bledxs/soff-monorepo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bledxs/soff-monorepo.git"
+  },
+  "license": "MIT",
+  "author": "Luis C. Rojas <luisc.rojas@hotmail.com>",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -43,6 +69,9 @@
     "typescript": "^5.9.3"
   },
   "packageManager": "npm@11.6.4",
+  "engines": {
+    "node": ">=20"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
