@@ -16,9 +16,60 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Soff Libraries - Documentation',
+  title: {
+    default: 'Soff Libraries - Lightweight TypeScript Utilities for LATAM',
+    template: '%s | Soff Libraries',
+  },
   description:
-    'Documentation and examples for Soff libraries: soff-date, soff-id, soff-mask, soff-money',
+    'A collection of lightweight, tree-shakeable, and zero-dependency TypeScript utilities designed for Latin American developers. Includes modules for dates, IDs, masks, money, and phone validation.',
+  keywords: [
+    'typescript',
+    'utilities',
+    'latam',
+    'colombia',
+    'mexico',
+    'argentina',
+    'brazil',
+    'chile',
+    'validation',
+    'formatting',
+    'date',
+    'money',
+    'mask',
+    'id',
+    'phone',
+    'zero-dependency',
+    'tree-shakeable',
+  ],
+  authors: [{ name: 'Luis C. Rojas', url: 'https://github.com/bledxs' }],
+  creator: 'Luis C. Rojas',
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    url: 'https://soff.dev', // Placeholder, update if real URL exists
+    title: 'Soff Libraries - Lightweight TypeScript Utilities for LATAM',
+    description:
+      'Optimize your development with Soff: A modular suite of TypeScript tools for LATAM. Zero dependencies, maximum performance.',
+    siteName: 'Soff Libraries',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Soff Libraries - Lightweight TypeScript Utilities for LATAM',
+    description:
+      'Optimize your development with Soff: A modular suite of TypeScript tools for LATAM. Zero dependencies, maximum performance.',
+    creator: '@bledxs', // Placeholder
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({

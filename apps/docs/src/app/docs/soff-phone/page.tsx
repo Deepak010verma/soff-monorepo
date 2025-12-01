@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { JsonLd } from '@/components/json-ld';
 
 export const metadata: Metadata = {
   title: 'soff-phone - Phone Validation',
@@ -11,6 +12,47 @@ export const metadata: Metadata = {
 export default function SoffPhonePage() {
   return (
     <div className="container max-w-4xl py-6 lg:py-10">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'soff-phone',
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Any',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+          description: 'Lightweight phone number validation and formatting for LATAM.',
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: 'https://soff.dev',
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Documentation',
+              item: 'https://soff.dev/docs',
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: 'soff-phone',
+              item: 'https://soff.dev/docs/soff-phone',
+            },
+          ],
+        }}
+      />
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
           <h1 className="inline-block font-heading text-4xl tracking-tight lg:text-5xl">
@@ -33,7 +75,7 @@ export default function SoffPhonePage() {
       <hr className="my-8" />
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Card>
+        <Card id="features">
           <CardHeader>
             <CardTitle>Features</CardTitle>
             <CardDescription>Why use soff-phone?</CardDescription>
@@ -49,7 +91,7 @@ export default function SoffPhonePage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card id="installation">
           <CardHeader>
             <CardTitle>Installation</CardTitle>
             <CardDescription>Add to your project</CardDescription>
@@ -62,7 +104,7 @@ export default function SoffPhonePage() {
         </Card>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-10" id="usage">
         <Tabs defaultValue="co" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="co">Colombia 🇨🇴</TabsTrigger>

@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { CodeBlock } from '@/components/code-block';
 import { GeoSearch } from './geo-search';
 import { getVersion } from '@/lib/versions';
+import { JsonLd } from '@/components/json-ld';
 
 export const metadata = {
   title: 'soff-geo - Geographic Data',
@@ -16,6 +17,48 @@ export default function SoffGeoPage() {
 
   return (
     <article className="space-y-8">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'soff-geo',
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Any',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+          description:
+            'Lightweight geographic data library for LATAM - Departments, municipalities, postal codes and more.',
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: 'https://soff.dev',
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Documentation',
+              item: 'https://soff.dev/docs',
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: 'soff-geo',
+              item: 'https://soff.dev/docs/soff-geo',
+            },
+          ],
+        }}
+      />
       {/* Header */}
       <div>
         <div className="flex items-center gap-3">
@@ -45,13 +88,17 @@ export default function SoffGeoPage() {
 
       {/* Installation */}
       <section>
-        <h2 className="mb-4 text-2xl font-semibold">Installation</h2>
+        <h2 id="installation" className="mb-4 text-2xl font-semibold">
+          Installation
+        </h2>
         <CodeBlock code="npm install soff-geo">npm install soff-geo</CodeBlock>
       </section>
 
       {/* Quick Start */}
       <section>
-        <h2 className="mb-4 text-2xl font-semibold">Quick Start</h2>
+        <h2 id="quick-start" className="mb-4 text-2xl font-semibold">
+          Quick Start
+        </h2>
         <CodeBlock
           code={`// Import only what you need
 import { getDepartments, getMunicipalities, searchMunicipalities } from 'soff-geo/co';
@@ -85,7 +132,9 @@ const results = searchMunicipalities('medellin');
 
       {/* Available Locales */}
       <section>
-        <h2 className="mb-4 text-2xl font-semibold">Available Locales</h2>
+        <h2 id="available-locales" className="mb-4 text-2xl font-semibold">
+          Available Locales
+        </h2>
         <div className="grid gap-2">
           {[
             {
@@ -133,7 +182,9 @@ const results = searchMunicipalities('medellin');
 
       {/* API Reference */}
       <section>
-        <h2 className="mb-4 text-2xl font-semibold">API Reference</h2>
+        <h2 id="api-reference" className="mb-4 text-2xl font-semibold">
+          API Reference
+        </h2>
 
         <Tabs defaultValue="co">
           <TabsList className="flex-wrap">
