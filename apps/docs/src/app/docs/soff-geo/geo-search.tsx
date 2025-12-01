@@ -8,13 +8,14 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { searchMunicipalities as searchCo } from 'soff-geo/co';
 import { searchMunicipalities as searchMx } from 'soff-geo/mx';
+import type { SearchResult, Municipality } from 'soff-geo/core';
 
 type Country = 'co' | 'mx';
 
 export function GeoSearch() {
   const [country, setCountry] = React.useState<Country>('co');
   const [query, setQuery] = React.useState('');
-  const [results, setResults] = React.useState<any[]>([]);
+  const [results, setResults] = React.useState<SearchResult<Municipality>[]>([]);
 
   React.useEffect(() => {
     if (!query) {
