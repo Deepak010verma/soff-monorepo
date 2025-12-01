@@ -40,7 +40,7 @@ const libraries = [
 
 export default function HomePage() {
   return (
-    <div className="container mx-auto max-w-5xl px-6 py-12">
+    <div className="container mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       {/* Hero */}
       <section className="mb-16 text-center">
         <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">Soff Libraries</h1>
@@ -99,7 +99,7 @@ export default function HomePage() {
       {/* Features */}
       <section className="mt-16">
         <h2 className="mb-6 text-2xl font-semibold">Why Soff?</h2>
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
           <div className="rounded-lg border border-border p-6">
             <h3 className="mb-2 font-semibold">🌳 Tree-shakeable</h3>
             <p className="text-sm text-muted-foreground">

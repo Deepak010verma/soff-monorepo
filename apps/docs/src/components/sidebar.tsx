@@ -34,7 +34,7 @@ const libraries = [
 
 export function Sidebar() {
   return (
-    <aside className="w-64 border-r border-border bg-sidebar p-6">
+    <aside className="hidden w-64 shrink-0 border-r border-border bg-sidebar p-6 lg:block">
       <div className="mb-8">
         <Link href="/" className="text-xl font-bold text-foreground">
           Soff Libraries

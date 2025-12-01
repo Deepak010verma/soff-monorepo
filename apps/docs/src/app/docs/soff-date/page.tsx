@@ -109,14 +109,14 @@ const next = getNextHoliday(new Date());
           ].map((locale) => (
             <div
               key={locale.name}
-              className="flex items-center justify-between rounded-lg border border-border p-3"
+              className="flex flex-col gap-2 rounded-lg border border-border p-3 sm:flex-row sm:items-center sm:justify-between"
             >
               <div className="flex items-center gap-2">
                 <span className="text-xl">{locale.flag}</span>
                 <span className="font-medium">{locale.name}</span>
               </div>
-              <div className="flex items-center gap-4">
-                <code className="text-sm text-muted-foreground">{locale.import}</code>
+              <div className="flex items-center gap-2 sm:gap-4">
+                <code className="text-xs text-muted-foreground sm:text-sm">{locale.import}</code>
                 <Badge variant="outline">{locale.holidays} holidays</Badge>
               </div>
             </div>

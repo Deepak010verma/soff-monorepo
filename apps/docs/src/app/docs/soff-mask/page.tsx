@@ -113,8 +113,8 @@ mask('ABC123', 'AAA-###');           // 'ABC-123'`}</code>
       {/* Pattern Tokens */}
       <section>
         <h2 className="mb-4 text-2xl font-semibold">Pattern Tokens</h2>
-        <div className="rounded-lg border border-border">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto rounded-lg border border-border">
+          <table className="w-full min-w-[400px] text-sm">
             <thead>
               <tr className="border-b border-border bg-muted/50">
                 <th className="px-4 py-3 text-left font-medium">Token</th>
