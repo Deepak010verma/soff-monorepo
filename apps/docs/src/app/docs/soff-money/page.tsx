@@ -1,10 +1,10 @@
-import { Coins, Radio, Gem, Binary, Globe, Scale } from 'lucide-react';
+import { Coins, Radio, Gem, Binary, Globe, Scale, Percent, Calculator } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { CodeBlock } from '@/components/code-block';
-import { Money, COP, USD, MXN } from 'soff-money';
+import { Money, COP, USD, MXN, CLP, EUR } from 'soff-money';
 import { MoneyCalculator } from './money-calculator';
 import { getVersion } from '@/lib/versions';
 
@@ -16,16 +16,22 @@ function getFormattingExamples() {
   const cop = Money.fromDecimal(1500000, COP);
   const usd = Money.fromDecimal(100.5, USD);
   const mxn = Money.fromDecimal(25000, MXN);
+  const clp = Money.fromDecimal(150000, CLP);
+  const eur = Money.fromDecimal(1500, EUR);
 
   return {
     cop: cop.format(),
     usd: usd.format(),
     mxn: mxn.format(),
+    clp: clp.format(),
+    eur: eur.format(),
     copNoDecimals: cop.format({ showDecimals: false }),
     addition: cop.add(Money.fromDecimal(500000, COP)).format(),
     distribution: Money.fromDecimal(100, USD)
       .distribute(3)
       .map((m) => m.format()),
+    percentage: usd.percentage(19).format(),
+    withTax: usd.addPercentage(19).format(),
   };
 }
 
@@ -77,6 +83,18 @@ export default function SoffMoneyPage() {
             <div className="rounded-lg bg-muted p-4">
               <p className="text-sm text-muted-foreground">MXN (Mexican Peso)</p>
               <p className="font-mono text-lg font-semibold">{examples.mxn}</p>
+            </div>
+            <div className="rounded-lg bg-muted p-4">
+              <p className="text-sm text-muted-foreground">CLP (Chilean Peso)</p>
+              <p className="font-mono text-lg font-semibold">{examples.clp}</p>
+            </div>
+            <div className="rounded-lg bg-muted p-4">
+              <p className="text-sm text-muted-foreground">EUR (Euro)</p>
+              <p className="font-mono text-lg font-semibold">{examples.eur}</p>
+            </div>
+            <div className="rounded-lg bg-muted p-4">
+              <p className="text-sm text-muted-foreground">19% Tax on $100.50</p>
+              <p className="font-mono text-lg font-semibold">{examples.withTax}</p>
             </div>
             <div className="rounded-lg bg-muted p-4">
               <p className="text-sm text-muted-foreground">Addition (COP)</p>
@@ -141,7 +159,7 @@ const shares = Money.fromDecimal(100, USD).distribute(3);
       {/* Key Features */}
       <section>
         <h2 className="mb-4 text-2xl font-semibold">Key Features</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-lg border border-border p-4">
             <h3 className="flex items-center gap-2 font-semibold">
               <Gem size={16} /> Immutable
@@ -160,10 +178,10 @@ const shares = Money.fromDecimal(100, USD).distribute(3);
           </div>
           <div className="rounded-lg border border-border p-4">
             <h3 className="flex items-center gap-2 font-semibold">
-              <Globe size={16} /> LATAM Currencies
+              <Globe size={16} /> 9 Currencies
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              Pre-configured COP, MXN, BRL, ARS, USD with correct formatting.
+              COP, MXN, BRL, ARS, USD, CLP, PEN, UYU, EUR with correct formatting.
             </p>
           </div>
           <div className="rounded-lg border border-border p-4">
@@ -172,6 +190,22 @@ const shares = Money.fromDecimal(100, USD).distribute(3);
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">
               Split money without losing cents. Perfect for bill splitting.
+            </p>
+          </div>
+          <div className="rounded-lg border border-border p-4">
+            <h3 className="flex items-center gap-2 font-semibold">
+              <Percent size={16} /> Percentage Ops
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Calculate, add, or subtract percentages. Perfect for tax/discounts.
+            </p>
+          </div>
+          <div className="rounded-lg border border-border p-4">
+            <h3 className="flex items-center gap-2 font-semibold">
+              <Calculator size={16} /> Static Helpers
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Money.sum(), Money.average(), Money.minimum(), Money.maximum()
             </p>
           </div>
         </div>
@@ -197,6 +231,10 @@ const shares = Money.fromDecimal(100, USD).distribute(3);
                 { name: '🇧🇷 Brazilian Real', code: 'BRL', symbol: 'R$', example: 'R$ 1.500,00' },
                 { name: '🇦🇷 Argentine Peso', code: 'ARS', symbol: '$', example: '$ 150.000,00' },
                 { name: '🇺🇸 US Dollar', code: 'USD', symbol: '$', example: '$1,500.00' },
+                { name: '🇨🇱 Chilean Peso', code: 'CLP', symbol: '$', example: '$ 150.000' },
+                { name: '🇵🇪 Peruvian Sol', code: 'PEN', symbol: 'S/', example: 'S/ 1,500.00' },
+                { name: '🇺🇾 Uruguayan Peso', code: 'UYU', symbol: '$', example: '$ 1.500,00' },
+                { name: '🇪🇺 Euro', code: 'EUR', symbol: '€', example: '1.500,00 €' },
               ].map((c) => (
                 <tr key={c.code} className="border-b border-border last:border-0">
                   <td className="px-4 py-3">{c.name}</td>
@@ -215,10 +253,12 @@ const shares = Money.fromDecimal(100, USD).distribute(3);
         <h2 className="mb-4 text-2xl font-semibold">API Reference</h2>
 
         <Tabs defaultValue="creation">
-          <TabsList>
+          <TabsList className="flex-wrap">
             <TabsTrigger value="creation">Creation</TabsTrigger>
             <TabsTrigger value="arithmetic">Arithmetic</TabsTrigger>
+            <TabsTrigger value="percentage">Percentage</TabsTrigger>
             <TabsTrigger value="comparison">Comparison</TabsTrigger>
+            <TabsTrigger value="static">Static Methods</TabsTrigger>
             <TabsTrigger value="formatting">Formatting</TabsTrigger>
           </TabsList>
 
@@ -272,10 +312,45 @@ a.distribute(3)              // [$33.34, $33.33, $33.33]
 a.distributeByRatios([1,2,2]) // [$20.00, $40.00, $40.00]`}</CodeBlock>
           </TabsContent>
 
+          <TabsContent value="percentage" className="mt-4">
+            <CodeBlock
+              code={`const price = Money.fromDecimal(100, USD);
+
+// Calculate percentage
+price.percentage(19)         // $19.00 (19% of $100)
+
+// Add percentage (tax)
+price.addPercentage(19)      // $119.00 (price + 19%)
+
+// Subtract percentage (discount)
+price.subtractPercentage(10) // $90.00 (price - 10%)
+
+// Real-world example: Price with tax and discount
+const subtotal = Money.fromDecimal(250, USD);
+const withTax = subtotal.addPercentage(19);     // $297.50
+const withDiscount = withTax.subtractPercentage(5); // $282.63`}
+            >{`const price = Money.fromDecimal(100, USD);
+
+// Calculate percentage
+price.percentage(19)         // $19.00 (19% of $100)
+
+// Add percentage (tax)
+price.addPercentage(19)      // $119.00 (price + 19%)
+
+// Subtract percentage (discount)
+price.subtractPercentage(10) // $90.00 (price - 10%)
+
+// Real-world example: Price with tax and discount
+const subtotal = Money.fromDecimal(250, USD);
+const withTax = subtotal.addPercentage(19);     // $297.50
+const withDiscount = withTax.subtractPercentage(5); // $282.63`}</CodeBlock>
+          </TabsContent>
+
           <TabsContent value="comparison" className="mt-4">
             <CodeBlock
               code={`const a = Money.fromDecimal(100, USD);
 const b = Money.fromDecimal(50, USD);
+const c = Money.fromDecimal(150, USD);
 
 a.equals(b)              // false
 a.greaterThan(b)         // true
@@ -283,11 +358,21 @@ a.lessThan(b)            // false
 a.greaterThanOrEqual(b)  // true
 a.lessThanOrEqual(b)     // false
 
+// Min/Max/Clamp
+a.min(b)                 // $50.00
+a.max(b)                 // $100.00
+a.clamp(b, c)            // $100.00 (between $50 and $150)
+
+// Range check
+a.isBetween(b, c)        // true (100 is between 50 and 150)
+
+// State checks
 a.isZero()      // false
 a.isPositive()  // true
 a.isNegative()  // false`}
             >{`const a = Money.fromDecimal(100, USD);
 const b = Money.fromDecimal(50, USD);
+const c = Money.fromDecimal(150, USD);
 
 a.equals(b)              // false
 a.greaterThan(b)         // true
@@ -295,9 +380,56 @@ a.lessThan(b)            // false
 a.greaterThanOrEqual(b)  // true
 a.lessThanOrEqual(b)     // false
 
+// Min/Max/Clamp
+a.min(b)                 // $50.00
+a.max(b)                 // $100.00
+a.clamp(b, c)            // $100.00 (between $50 and $150)
+
+// Range check
+a.isBetween(b, c)        // true (100 is between 50 and 150)
+
+// State checks
 a.isZero()      // false
 a.isPositive()  // true
 a.isNegative()  // false`}</CodeBlock>
+          </TabsContent>
+
+          <TabsContent value="static" className="mt-4">
+            <CodeBlock
+              code={`const items = [
+  Money.fromDecimal(29.99, USD),
+  Money.fromDecimal(49.99, USD),
+  Money.fromDecimal(19.99, USD),
+];
+
+// Sum all values
+Money.sum(items)       // $99.97
+
+// Get minimum
+Money.minimum(items)   // $19.99
+
+// Get maximum
+Money.maximum(items)   // $49.99
+
+// Calculate average
+Money.average(items)   // $33.32`}
+            >{`const items = [
+  Money.fromDecimal(29.99, USD),
+  Money.fromDecimal(49.99, USD),
+  Money.fromDecimal(19.99, USD),
+];
+
+// Sum all values
+Money.sum(items)       // $99.97
+
+// Get minimum
+Money.minimum(items)   // $19.99
+
+// Get maximum
+Money.maximum(items)   // $49.99
+
+// Calculate average
+Money.average(items)   // $33.32`}</CodeBlock>
           </TabsContent>
 
           <TabsContent value="formatting" className="mt-4">
@@ -310,6 +442,7 @@ price.format({ showDecimals: false })   // '$1,501'
 price.format({ symbolPosition: 'after' }) // '1,500.50 $'
 
 price.toDecimal()  // 1500.50
+price.toCents()    // 150050 (alias for .cents)
 price.cents        // 150050
 price.toJSON()     // { cents: 150050, currency: 'USD' }
 price.toString()   // '$1,500.50'`}
@@ -321,6 +454,7 @@ price.format({ showDecimals: false })   // '$1,501'
 price.format({ symbolPosition: 'after' }) // '1,500.50 $'
 
 price.toDecimal()  // 1500.50
+price.toCents()    // 150050 (alias for .cents)
 price.cents        // 150050
 price.toJSON()     // { cents: 150050, currency: 'USD' }
 price.toString()   // '$1,500.50'`}</CodeBlock>
@@ -338,36 +472,60 @@ const items = [
   Money.fromDecimal(49.99, USD),
   Money.fromDecimal(19.99, USD),
 ];
-const total = items.reduce((sum, item) => sum.add(item), Money.zero(USD));
+const total = Money.sum(items);  // $99.97
 
-// Apply discount
-const discount = total.multiply(0.10);  // 10% off
-const final = total.subtract(discount);
+// Apply discount (10% off)
+const discounted = total.subtractPercentage(10);  // $89.97
 
-// Tax calculation
-const tax = final.multiply(0.19);  // 19% IVA
-const withTax = final.add(tax);
+// Tax calculation (19% IVA)
+const withTax = discounted.addPercentage(19);  // $107.07
 
-// Split bill
-const perPerson = withTax.distribute(4);  // 4 people`}
+// Split bill (4 people)
+const perPerson = withTax.distribute(4);
+// [$26.77, $26.77, $26.77, $26.76]
+
+// Price validation
+const minOrder = Money.fromDecimal(50, USD);
+const maxOrder = Money.fromDecimal(500, USD);
+
+if (!total.isBetween(minOrder, maxOrder)) {
+  throw new Error('Order must be between $50 and $500');
+}
+
+// Find cheapest/most expensive item
+const cheapest = Money.minimum(items);  // $19.99
+const mostExpensive = Money.maximum(items);  // $49.99
+const average = Money.average(items);  // $33.32`}
         >{`// Shopping cart total
 const items = [
   Money.fromDecimal(29.99, USD),
   Money.fromDecimal(49.99, USD),
   Money.fromDecimal(19.99, USD),
 ];
-const total = items.reduce((sum, item) => sum.add(item), Money.zero(USD));
+const total = Money.sum(items);  // $99.97
 
-// Apply discount
-const discount = total.multiply(0.10);  // 10% off
-const final = total.subtract(discount);
+// Apply discount (10% off)
+const discounted = total.subtractPercentage(10);  // $89.97
 
-// Tax calculation
-const tax = final.multiply(0.19);  // 19% IVA
-const withTax = final.add(tax);
+// Tax calculation (19% IVA)
+const withTax = discounted.addPercentage(19);  // $107.07
 
-// Split bill
-const perPerson = withTax.distribute(4);  // 4 people`}</CodeBlock>
+// Split bill (4 people)
+const perPerson = withTax.distribute(4);
+// [$26.77, $26.77, $26.77, $26.76]
+
+// Price validation
+const minOrder = Money.fromDecimal(50, USD);
+const maxOrder = Money.fromDecimal(500, USD);
+
+if (!total.isBetween(minOrder, maxOrder)) {
+  throw new Error('Order must be between $50 and $500');
+}
+
+// Find cheapest/most expensive item
+const cheapest = Money.minimum(items);  // $19.99
+const mostExpensive = Money.maximum(items);  // $49.99
+const average = Money.average(items);  // $33.32`}</CodeBlock>
       </section>
     </article>
   );

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { Money, COP, USD, MXN, BRL, ARS } from 'soff-money';
+import { Money, COP, USD, MXN, BRL, ARS, CLP, PEN, UYU, EUR } from 'soff-money';
 
 const currencies = [
   { name: 'COP', currency: COP, flag: '🇨🇴' },
@@ -10,17 +10,25 @@ const currencies = [
   { name: 'MXN', currency: MXN, flag: '🇲🇽' },
   { name: 'BRL', currency: BRL, flag: '🇧🇷' },
   { name: 'ARS', currency: ARS, flag: '🇦🇷' },
+  { name: 'CLP', currency: CLP, flag: '🇨🇱' },
+  { name: 'PEN', currency: PEN, flag: '🇵🇪' },
+  { name: 'UYU', currency: UYU, flag: '🇺🇾' },
+  { name: 'EUR', currency: EUR, flag: '🇪🇺' },
 ];
 
 export function MoneyCalculator() {
   const [amount, setAmount] = useState('1500000');
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
   const [splitParts, setSplitParts] = useState('3');
+  const [taxPercent, setTaxPercent] = useState('19');
 
   const numericAmount = parseFloat(amount) || 0;
   const money = Money.fromDecimal(numericAmount, selectedCurrency.currency);
   const parts = parseInt(splitParts) || 1;
+  const tax = parseFloat(taxPercent) || 0;
   const distribution = money.distribute(Math.max(1, Math.min(10, parts)));
+  const withTax = money.addPercentage(tax);
+  const taxAmount = money.percentage(tax);
 
   return (
     <div className="space-y-6">
@@ -58,6 +66,31 @@ export function MoneyCalculator() {
       <div className="rounded-lg bg-muted p-4">
         <p className="text-sm text-muted-foreground">Formatted</p>
         <p className="font-mono text-2xl font-bold">{money.format()}</p>
+      </div>
+
+      {/* Tax calculator */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-4">
+          <label className="text-sm text-muted-foreground">Tax/Fee %</label>
+          <Input
+            type="number"
+            min="0"
+            max="100"
+            value={taxPercent}
+            onChange={(e) => setTaxPercent(e.target.value)}
+            className="w-20 font-mono"
+          />
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <div className="rounded-lg border border-border p-3">
+            <p className="text-xs text-muted-foreground">Tax Amount ({tax}%)</p>
+            <p className="font-mono font-semibold">{taxAmount.format()}</p>
+          </div>
+          <div className="rounded-lg border border-border p-3">
+            <p className="text-xs text-muted-foreground">Total with Tax</p>
+            <p className="font-mono font-semibold">{withTax.format()}</p>
+          </div>
+        </div>
       </div>
 
       {/* Split calculator */}
@@ -99,7 +132,7 @@ export function MoneyCalculator() {
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="rounded-lg bg-muted p-3">
           <p className="text-xs text-muted-foreground">Cents (internal)</p>
-          <p className="font-mono">{money.cents}</p>
+          <p className="font-mono">{money.toCents()}</p>
         </div>
         <div className="rounded-lg bg-muted p-3">
           <p className="text-xs text-muted-foreground">Decimal</p>

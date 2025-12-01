@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { CodeBlock } from '@/components/code-block';
-import { mask, unmask, maskWithResult } from 'soff-mask';
+import { mask, unmask, maskWithResult, getPlaceholder, isValidFormat, extractRaw } from 'soff-mask';
 import { phoneCO, cpf, creditCard, dateDMY } from 'soff-mask';
 import { MaskDemo } from './mask-demo';
 import { getVersion } from '@/lib/versions';
@@ -21,6 +21,9 @@ function getMaskingExamples() {
     date: mask('25122024', dateDMY),
     unmaskExample: unmask('(300) 123 4567', phoneCO),
     maskResult: maskWithResult('300123', phoneCO),
+    placeholder: getPlaceholder(phoneCO),
+    isValid: isValidFormat('(300) 123 4567', phoneCO),
+    extractDigits: extractRaw('(300) 123-4567', 'digits'),
   };
 }
 
@@ -79,6 +82,16 @@ export default function SoffMaskPage() {
               <p className="text-sm text-muted-foreground">unmask(&quot;(300) 123 4567&quot;)</p>
               <p className="font-mono text-lg font-semibold">{examples.unmaskExample}</p>
             </div>
+            <div className="rounded-lg bg-muted p-4">
+              <p className="text-sm text-muted-foreground">getPlaceholder(phoneCO)</p>
+              <p className="font-mono text-lg font-semibold">{examples.placeholder}</p>
+            </div>
+            <div className="rounded-lg bg-muted p-4">
+              <p className="text-sm text-muted-foreground">
+                extractRaw(&quot;(300) 123-4567&quot;, &apos;digits&apos;)
+              </p>
+              <p className="font-mono text-lg font-semibold">{examples.extractDigits}</p>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -95,7 +108,7 @@ export default function SoffMaskPage() {
       <section>
         <h2 className="mb-4 text-2xl font-semibold">Quick Start</h2>
         <CodeBlock
-          code={`import { mask, unmask, maskWithResult } from 'soff-mask';
+          code={`import { mask, unmask, maskWithResult, getPlaceholder, isValidFormat, extractRaw } from 'soff-mask';
 import { phoneCO, cpf, creditCard } from 'soff-mask';
 
 // Apply a mask
@@ -108,10 +121,22 @@ unmask('(300) 123 4567', phoneCO);   // '3001234567'
 // Get detailed result
 maskWithResult('300123', phoneCO);
 // { value: '(300) 123', raw: '300123', complete: false, cursorPosition: 9 }
+
+// Get placeholder (for input hints)
+getPlaceholder(phoneCO);             // '(___) ___ ____'
+getPlaceholder('##/##/####', '*');   // '**/**/****'
+
+// Validate format
+isValidFormat('(300) 123 4567', phoneCO);  // true
+isValidFormat('300123', phoneCO);           // false (incomplete)
+
+// Extract characters
+extractRaw('(300) 123-4567', 'digits');     // '3001234567'
+extractRaw('ABC-123', 'letters');           // 'ABC'
 
 // Custom pattern
 mask('ABC123', 'AAA-###');           // 'ABC-123'`}
-        >{`import { mask, unmask, maskWithResult } from 'soff-mask';
+        >{`import { mask, unmask, maskWithResult, getPlaceholder, isValidFormat, extractRaw } from 'soff-mask';
 import { phoneCO, cpf, creditCard } from 'soff-mask';
 
 // Apply a mask
@@ -124,6 +149,18 @@ unmask('(300) 123 4567', phoneCO);   // '3001234567'
 // Get detailed result
 maskWithResult('300123', phoneCO);
 // { value: '(300) 123', raw: '300123', complete: false, cursorPosition: 9 }
+
+// Get placeholder (for input hints)
+getPlaceholder(phoneCO);             // '(___) ___ ____'
+getPlaceholder('##/##/####', '*');   // '**/**/****'
+
+// Validate format
+isValidFormat('(300) 123 4567', phoneCO);  // true
+isValidFormat('300123', phoneCO);           // false (incomplete)
+
+// Extract characters
+extractRaw('(300) 123-4567', 'digits');     // '3001234567'
+extractRaw('ABC-123', 'letters');           // 'ABC'
 
 // Custom pattern
 mask('ABC123', 'AAA-###');           // 'ABC-123'`}</CodeBlock>
@@ -337,6 +374,14 @@ maskWithResult(value: string, pattern: string): MaskResult
 parsePattern(pattern: string): MaskToken[]
 isComplete(value: string, pattern: string): boolean
 getPatternLength(pattern: string): number
+
+// NEW in v0.2.0
+getPlaceholder(pattern: string, placeholder?: string): string
+isValidFormat(value: string, pattern: string): boolean
+getNextCursorPosition(value: string, pattern: string, cursorPosition: number): number
+extractRaw(value: string, type?: 'digits' | 'letters' | 'alphanumeric' | 'all'): string
+
+// Dynamic masks
 createDynamicMask(rules: DynamicMaskRule[]): (value: string) => string
 
 // DOM
@@ -357,6 +402,14 @@ maskWithResult(value: string, pattern: string): MaskResult
 parsePattern(pattern: string): MaskToken[]
 isComplete(value: string, pattern: string): boolean
 getPatternLength(pattern: string): number
+
+// NEW in v0.2.0
+getPlaceholder(pattern: string, placeholder?: string): string
+isValidFormat(value: string, pattern: string): boolean
+getNextCursorPosition(value: string, pattern: string, cursorPosition: number): number
+extractRaw(value: string, type?: 'digits' | 'letters' | 'alphanumeric' | 'all'): string
+
+// Dynamic masks
 createDynamicMask(rules: DynamicMaskRule[]): (value: string) => string
 
 // DOM
