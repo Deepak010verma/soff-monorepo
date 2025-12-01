@@ -11,6 +11,7 @@ import {
   Download,
   ExternalLink,
   Package,
+  Map,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -47,6 +48,12 @@ const libraries = [
     href: '/docs/soff-date',
     icon: Calendar,
     colorClass: 'text-soff-date',
+  },
+  {
+    name: 'soff-geo' as LibraryName,
+    href: '/docs/soff-geo',
+    icon: Map,
+    colorClass: 'text-soff-geo',
   },
   {
     name: 'soff-id' as LibraryName,

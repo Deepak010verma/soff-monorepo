@@ -1,10 +1,12 @@
 import soffDatePkg from '../../../../packages/soff-date/package.json';
+import soffGeoPkg from '../../../../packages/soff-geo/package.json';
 import soffIdPkg from '../../../../packages/soff-id/package.json';
 import soffMaskPkg from '../../../../packages/soff-mask/package.json';
 import soffMoneyPkg from '../../../../packages/soff-money/package.json';
 
 export const versions = {
   'soff-date': soffDatePkg.version,
+  'soff-geo': soffGeoPkg.version,
   'soff-id': soffIdPkg.version,
   'soff-mask': soffMaskPkg.version,
   'soff-money': soffMoneyPkg.version,
@@ -21,6 +23,11 @@ export const libraries = [
     name: 'soff-date' as const,
     description: soffDatePkg.description,
     version: soffDatePkg.version,
+  },
+  {
+    name: 'soff-geo' as const,
+    description: soffGeoPkg.description,
+    version: soffGeoPkg.version,
   },
   {
     name: 'soff-id' as const,
