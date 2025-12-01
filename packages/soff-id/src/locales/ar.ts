@@ -104,3 +104,88 @@ export function formatDNI(dni: string): string {
 export function cleanDNI(dni: string): string {
   return cleanDigits(dni);
 }
+
+/**
+ * CUIT type prefixes
+ */
+const CUIT_TYPE_COMPANY = ['30', '33', '34'];
+const CUIT_TYPE_PERSON = ['20', '23', '24', '27'];
+
+/**
+ * Check if CUIT belongs to a company
+ */
+export function isCUITCompany(cuit: string): boolean {
+  const cleaned = cleanDigits(cuit);
+  if (cleaned.length !== 11) return false;
+  const type = cleaned.slice(0, 2);
+  return CUIT_TYPE_COMPANY.includes(type);
+}
+
+/**
+ * Check if CUIT belongs to an individual
+ */
+export function isCUITPerson(cuit: string): boolean {
+  const cleaned = cleanDigits(cuit);
+  if (cleaned.length !== 11) return false;
+  const type = cleaned.slice(0, 2);
+  return CUIT_TYPE_PERSON.includes(type);
+}
+
+/**
+ * Get the type of entity from CUIT
+ * @returns 'company' | 'male' | 'female' | 'unknown'
+ */
+export function getCUITType(cuit: string): 'company' | 'male' | 'female' | 'unknown' {
+  const cleaned = cleanDigits(cuit);
+  if (cleaned.length !== 11) return 'unknown';
+
+  const type = cleaned.slice(0, 2);
+
+  if (CUIT_TYPE_COMPANY.includes(type)) return 'company';
+  if (type === '20') return 'male';
+  if (type === '27') return 'female';
+  // 23 and 24 can be either male or female
+  if (type === '23' || type === '24') return 'unknown';
+
+  return 'unknown';
+}
+
+/**
+ * Get DNI from CUIT/CUIL
+ */
+export function getDNIFromCUIT(cuit: string): string | null {
+  const cleaned = cleanDigits(cuit);
+  if (cleaned.length !== 11) return null;
+  return cleaned.slice(2, 10);
+}
+
+/**
+ * Generate a valid CUIT from DNI
+ * @param dni - The DNI (7-8 digits)
+ * @param type - Type prefix (default '20' for male individual)
+ */
+export function generateCUITFromDNI(
+  dni: string,
+  type: '20' | '23' | '24' | '27' | '30' | '33' | '34' = '20',
+): string {
+  const cleanedDNI = cleanDigits(dni).padStart(8, '0');
+  const body = type + cleanedDNI;
+  const checkDigit = calculateCUITCheckDigit(body);
+  return body + checkDigit;
+}
+
+/**
+ * Generate a random valid CUIT
+ * @param isCompany - Whether to generate a company CUIT
+ */
+export function generateCUIT(isCompany: boolean = false): string {
+  const types = isCompany ? CUIT_TYPE_COMPANY : ['20', '27'];
+  const type = types[Math.floor(Math.random() * types.length)];
+
+  let dni = '';
+  for (let i = 0; i < 8; i++) {
+    dni += Math.floor(Math.random() * 10);
+  }
+
+  return generateCUITFromDNI(dni, type as '20' | '27' | '30' | '33' | '34');
+}

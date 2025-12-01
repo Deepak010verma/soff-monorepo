@@ -109,11 +109,26 @@ export function cleanCC(cc: string): string {
 
 /**
  * Validate a Cédula de Extranjería (CE)
- * @param ce - The CE number (6-10 digits)
+ * @param ce - The CE number (6-10 alphanumeric characters)
  */
 export function validateCE(ce: string): boolean {
-  const cleaned = cleanDigits(ce);
+  const cleaned = ce.replace(/[^a-zA-Z0-9]/g, '');
   return cleaned.length >= 6 && cleaned.length <= 10;
+}
+
+/**
+ * Format a Cédula de Extranjería for display
+ */
+export function formatCE(ce: string): string {
+  const cleaned = ce.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+  return cleaned;
+}
+
+/**
+ * Clean a Cédula de Extranjería
+ */
+export function cleanCE(ce: string): string {
+  return ce.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
 }
 
 /**
@@ -123,4 +138,60 @@ export function validateCE(ce: string): boolean {
 export function validateTI(ti: string): boolean {
   const cleaned = cleanDigits(ti);
   return cleaned.length >= 10 && cleaned.length <= 11;
+}
+
+/**
+ * Format a Tarjeta de Identidad for display
+ */
+export function formatTI(ti: string): string {
+  const cleaned = cleanDigits(ti);
+  return cleaned.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+/**
+ * Clean a Tarjeta de Identidad
+ */
+export function cleanTI(ti: string): string {
+  return cleanDigits(ti);
+}
+
+/**
+ * Check if a NIT belongs to a company (persona jurídica)
+ * Company NITs typically start with 8 or 9
+ */
+export function isNITCompany(nit: string): boolean {
+  const cleaned = cleanDigits(nit);
+  if (cleaned.length < 9) return false;
+  const firstDigit = cleaned[0];
+  return firstDigit === '8' || firstDigit === '9';
+}
+
+/**
+ * Check if a NIT belongs to an individual (persona natural)
+ */
+export function isNITPerson(nit: string): boolean {
+  const cleaned = cleanDigits(nit);
+  if (cleaned.length < 9) return false;
+  return !isNITCompany(nit);
+}
+
+/**
+ * Generate a random valid NIT
+ * @param isCompany - Whether to generate a company NIT
+ */
+export function generateNIT(isCompany: boolean = true): string {
+  const prefix = isCompany
+    ? Math.random() < 0.5
+      ? '8'
+      : '9'
+    : String(Math.floor(Math.random() * 8));
+  const length = Math.floor(Math.random() * 7) + 8; // 8-14 digits body
+  let body = prefix;
+
+  for (let i = 1; i < length; i++) {
+    body += Math.floor(Math.random() * 10);
+  }
+
+  const checkDigit = calculateNITCheckDigit(body);
+  return body + checkDigit;
 }

@@ -81,3 +81,32 @@ export function cleanRUT(rut: string): string {
 export const validateRUN = validateRUT;
 export const formatRUN = formatRUT;
 export const cleanRUN = cleanRUT;
+export const calculateRUNCheckDigit = calculateRUTCheckDigit;
+
+/**
+ * Generate a random valid RUT
+ */
+export function generateRUT(): string {
+  // Generate a random 7-8 digit number (typical RUT range)
+  const length = Math.random() < 0.5 ? 7 : 8;
+  let body = '';
+
+  // First digit shouldn't be 0 for realistic RUTs
+  body += Math.floor(Math.random() * 9) + 1;
+
+  for (let i = 1; i < length; i++) {
+    body += Math.floor(Math.random() * 10);
+  }
+
+  const checkDigit = calculateRUTCheckDigit(body);
+  return body + checkDigit;
+}
+
+/**
+ * Check if RUT is valid and return formatted version
+ * @returns Formatted RUT if valid, null otherwise
+ */
+export function getFormattedRUTIfValid(rut: string): string | null {
+  if (!validateRUT(rut)) return null;
+  return formatRUT(rut);
+}

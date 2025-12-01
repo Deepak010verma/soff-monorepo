@@ -7,9 +7,30 @@ export {
   formatCC,
   cleanCC,
   validateCE,
+  formatCE,
+  cleanCE,
   validateTI,
+  formatTI,
+  cleanTI,
+  isNITCompany,
+  isNITPerson,
+  generateNIT,
 } from './co.js';
-export { validateCPF, formatCPF, cleanCPF, validateCNPJ, formatCNPJ, cleanCNPJ } from './br.js';
+export {
+  validateCPF,
+  formatCPF,
+  cleanCPF,
+  calculateCPFCheckDigit,
+  generateCPF,
+  validateCNPJ,
+  formatCNPJ,
+  cleanCNPJ,
+  calculateCNPJCheckDigit,
+  generateCNPJ,
+  isCNPJMatriz,
+  isCNPJFilial,
+  getCNPJBranchNumber,
+} from './br.js';
 export {
   validateRUT,
   formatRUT,
@@ -18,6 +39,9 @@ export {
   formatRUN,
   cleanRUN,
   calculateRUTCheckDigit,
+  calculateRUNCheckDigit,
+  generateRUT,
+  getFormattedRUTIfValid,
 } from './cl.js';
 export {
   validateCUIT,
@@ -30,6 +54,13 @@ export {
   formatDNI,
   cleanDNI,
   calculateCUITCheckDigit,
+  calculateCUILCheckDigit,
+  isCUITCompany,
+  isCUITPerson,
+  getCUITType,
+  getDNIFromCUIT,
+  generateCUITFromDNI,
+  generateCUIT,
 } from './ar.js';
 export {
   validateRFC,
@@ -40,4 +71,11 @@ export {
   cleanCURP,
   getCURPGender,
   getCURPBirthDate,
+  getCURPBirthState,
+  getCURPStateCode,
+  isRFCCompany,
+  isRFCPerson,
+  getRFCDate,
+  parseCURP,
+  parseRFC,
 } from './mx.js';

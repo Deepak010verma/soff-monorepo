@@ -148,3 +148,151 @@ export function getCURPBirthDate(curp: string): Date | null {
 
   return date;
 }
+
+/**
+ * Mexican state codes used in CURP
+ */
+const CURP_STATE_CODES: Record<string, string> = {
+  AS: 'Aguascalientes',
+  BC: 'Baja California',
+  BS: 'Baja California Sur',
+  CC: 'Campeche',
+  CL: 'Coahuila',
+  CM: 'Colima',
+  CS: 'Chiapas',
+  CH: 'Chihuahua',
+  DF: 'Ciudad de México',
+  DG: 'Durango',
+  GT: 'Guanajuato',
+  GR: 'Guerrero',
+  HG: 'Hidalgo',
+  JC: 'Jalisco',
+  MC: 'Estado de México',
+  MN: 'Michoacán',
+  MS: 'Morelos',
+  NT: 'Nayarit',
+  NL: 'Nuevo León',
+  OC: 'Oaxaca',
+  PL: 'Puebla',
+  QT: 'Querétaro',
+  QR: 'Quintana Roo',
+  SP: 'San Luis Potosí',
+  SL: 'Sinaloa',
+  SR: 'Sonora',
+  TC: 'Tabasco',
+  TS: 'Tamaulipas',
+  TL: 'Tlaxcala',
+  VZ: 'Veracruz',
+  YN: 'Yucatán',
+  ZS: 'Zacatecas',
+  NE: 'Nacido en el Extranjero',
+};
+
+/**
+ * Get the birth state from a CURP
+ * @returns State name or null if invalid
+ */
+export function getCURPBirthState(curp: string): string | null {
+  const cleaned = cleanDocument(curp).toUpperCase();
+  if (cleaned.length < 13) return null;
+
+  const stateCode = cleaned.slice(11, 13);
+  return CURP_STATE_CODES[stateCode] || null;
+}
+
+/**
+ * Get the state code from a CURP
+ * @returns Two-letter state code or null if invalid
+ */
+export function getCURPStateCode(curp: string): string | null {
+  const cleaned = cleanDocument(curp).toUpperCase();
+  if (cleaned.length < 13) return null;
+
+  const stateCode = cleaned.slice(11, 13);
+  return CURP_STATE_CODES[stateCode] ? stateCode : null;
+}
+
+/**
+ * Check if RFC belongs to a company (persona moral)
+ */
+export function isRFCCompany(rfc: string): boolean {
+  const cleaned = cleanDocument(rfc).toUpperCase();
+  return cleaned.length === 12;
+}
+
+/**
+ * Check if RFC belongs to an individual (persona física)
+ */
+export function isRFCPerson(rfc: string): boolean {
+  const cleaned = cleanDocument(rfc).toUpperCase();
+  return cleaned.length === 13;
+}
+
+/**
+ * Get the registration date from RFC
+ * @returns Date object or null if invalid
+ */
+export function getRFCDate(rfc: string): Date | null {
+  const cleaned = cleanDocument(rfc).toUpperCase();
+
+  if (cleaned.length !== 12 && cleaned.length !== 13) return null;
+
+  // Date starts at position 3 for companies, 4 for individuals
+  const dateStart = cleaned.length === 12 ? 3 : 4;
+  const dateStr = cleaned.slice(dateStart, dateStart + 6);
+
+  const year = parseInt(dateStr.slice(0, 2), 10);
+  const month = parseInt(dateStr.slice(2, 4), 10);
+  const day = parseInt(dateStr.slice(4, 6), 10);
+
+  // Assume 1900s for years > 30, 2000s otherwise (heuristic)
+  const fullYear = year > 30 ? 1900 + year : 2000 + year;
+
+  const date = new Date(fullYear, month - 1, day);
+
+  // Validate the date
+  if (date.getFullYear() !== fullYear || date.getMonth() !== month - 1 || date.getDate() !== day) {
+    return null;
+  }
+
+  return date;
+}
+
+/**
+ * Extract all info from a CURP
+ */
+export function parseCURP(curp: string): {
+  valid: boolean;
+  gender: 'M' | 'F' | null;
+  birthDate: Date | null;
+  birthState: string | null;
+  stateCode: string | null;
+} {
+  return {
+    valid: validateCURP(curp),
+    gender: getCURPGender(curp),
+    birthDate: getCURPBirthDate(curp),
+    birthState: getCURPBirthState(curp),
+    stateCode: getCURPStateCode(curp),
+  };
+}
+
+/**
+ * Extract info from RFC
+ */
+export function parseRFC(rfc: string): {
+  valid: boolean;
+  type: 'company' | 'person' | null;
+  date: Date | null;
+} {
+  const valid = validateRFC(rfc);
+  if (!valid) {
+    return { valid: false, type: null, date: null };
+  }
+
+  return {
+    valid: true,
+    type: isRFCCompany(rfc) ? 'company' : 'person',
+    date: getRFCDate(rfc),
+  };
+}

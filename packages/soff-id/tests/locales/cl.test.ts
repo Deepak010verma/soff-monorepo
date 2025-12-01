@@ -1,5 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { validateRUT, formatRUT, calculateRUTCheckDigit } from '../../src/locales/cl.js';
+import {
+  validateRUT,
+  formatRUT,
+  cleanRUT,
+  calculateRUTCheckDigit,
+  validateRUN,
+  calculateRUNCheckDigit,
+  generateRUT,
+  getFormattedRUTIfValid,
+} from '../../src/locales/cl.js';
 
 describe('Chilean Documents', () => {
   describe('RUT validation', () => {
@@ -28,6 +37,41 @@ describe('Chilean Documents', () => {
 
     it('should format RUT correctly', () => {
       expect(formatRUT('123456785')).toBe('12.345.678-5');
+    });
+
+    it('should clean RUT correctly', () => {
+      expect(cleanRUT('12.345.678-5')).toBe('123456785');
+      expect(cleanRUT('12345678-k')).toBe('12345678K');
+    });
+  });
+
+  describe('RUN validation (same as RUT)', () => {
+    it('should validate correct RUN', () => {
+      const check = calculateRUNCheckDigit('12345678');
+      expect(validateRUN('12345678-' + check)).toBe(true);
+    });
+  });
+
+  describe('RUT generation', () => {
+    it('should generate valid RUT', () => {
+      const rut = generateRUT();
+      expect(validateRUT(rut)).toBe(true);
+    });
+
+    it('should generate multiple unique RUTs', () => {
+      const ruts = new Set([generateRUT(), generateRUT(), generateRUT()]);
+      expect(ruts.size).toBeGreaterThan(1);
+    });
+  });
+
+  describe('RUT utilities', () => {
+    it('should return formatted RUT if valid', () => {
+      const check = calculateRUTCheckDigit('12345678');
+      expect(getFormattedRUTIfValid('12345678' + check)).toBe('12.345.678-' + check);
+    });
+
+    it('should return null for invalid RUT', () => {
+      expect(getFormattedRUTIfValid('12345678-0')).toBe(null);
     });
   });
 });

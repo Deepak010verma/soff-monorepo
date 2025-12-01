@@ -33,6 +33,42 @@ function calcCheckDigit(digits: string, weights: number[]): number {
 }
 
 /**
+ * Calculate CPF check digits
+ * @param cpf - The CPF body (9 digits without check digits)
+ * @returns The two check digits as a string
+ */
+export function calculateCPFCheckDigit(cpf: string): string {
+  const cleaned = cleanDigits(cpf).slice(0, 9).padStart(9, '0');
+
+  if (cleaned.length !== 9) {
+    throw new Error('CPF body must be 9 digits');
+  }
+
+  const digit1 = calcCheckDigit(cleaned, CPF_WEIGHTS_1);
+  const digit2 = calcCheckDigit(cleaned + digit1, CPF_WEIGHTS_2);
+
+  return `${digit1}${digit2}`;
+}
+
+/**
+ * Calculate CNPJ check digits
+ * @param cnpj - The CNPJ body (12 digits without check digits)
+ * @returns The two check digits as a string
+ */
+export function calculateCNPJCheckDigit(cnpj: string): string {
+  const cleaned = cleanDigits(cnpj).slice(0, 12).padStart(12, '0');
+
+  if (cleaned.length !== 12) {
+    throw new Error('CNPJ body must be 12 digits');
+  }
+
+  const digit1 = calcCheckDigit(cleaned, CNPJ_WEIGHTS_1);
+  const digit2 = calcCheckDigit(cleaned + digit1, CNPJ_WEIGHTS_2);
+
+  return `${digit1}${digit2}`;
+}
+
+/**
  * Validate a Brazilian CPF (Individual Tax ID)
  * @param cpf - The CPF to validate (11 digits)
  */
@@ -116,4 +152,58 @@ export function formatCNPJ(cnpj: string): string {
  */
 export function cleanCNPJ(cnpj: string): string {
   return cleanDigits(cnpj);
+}
+
+/**
+ * Generate a random valid CPF
+ */
+export function generateCPF(): string {
+  let body = '';
+  for (let i = 0; i < 9; i++) {
+    body += Math.floor(Math.random() * 10);
+  }
+  const checkDigits = calculateCPFCheckDigit(body);
+  return body + checkDigits;
+}
+
+/**
+ * Generate a random valid CNPJ
+ * @param branchNumber - The branch number (0001 for matriz, others for filiais)
+ */
+export function generateCNPJ(branchNumber: string = '0001'): string {
+  let base = '';
+  for (let i = 0; i < 8; i++) {
+    base += Math.floor(Math.random() * 10);
+  }
+  const body = base + branchNumber.padStart(4, '0');
+  const checkDigits = calculateCNPJCheckDigit(body);
+  return body + checkDigits;
+}
+
+/**
+ * Check if CNPJ is a matriz (main branch)
+ */
+export function isCNPJMatriz(cnpj: string): boolean {
+  const cleaned = cleanDigits(cnpj);
+  if (cleaned.length !== 14) return false;
+  return cleaned.slice(8, 12) === '0001';
+}
+
+/**
+ * Check if CNPJ is a filial (branch)
+ */
+export function isCNPJFilial(cnpj: string): boolean {
+  const cleaned = cleanDigits(cnpj);
+  if (cleaned.length !== 14) return false;
+  return cleaned.slice(8, 12) !== '0001';
+}
+
+/**
+ * Get the branch number from a CNPJ
+ * @returns The branch number (e.g., "0001" for matriz)
+ */
+export function getCNPJBranchNumber(cnpj: string): string | null {
+  const cleaned = cleanDigits(cnpj);
+  if (cleaned.length !== 14) return null;
+  return cleaned.slice(8, 12);
 }
