@@ -101,8 +101,8 @@ export default function SoffMoneyPage() {
       {/* Quick Start */}
       <section>
         <h2 className="mb-4 text-2xl font-semibold">Quick Start</h2>
-        <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-          <code>{`import { Money, COP, USD, MXN } from 'soff-money';
+        <CodeBlock
+          code={`import { Money, COP, USD, MXN } from 'soff-money';
 
 // Create money from decimal
 const price = Money.fromDecimal(1500000, COP);
@@ -118,8 +118,24 @@ total.format();  // '$ 2.000.000'
 
 // Distribution without losing cents
 const shares = Money.fromDecimal(100, USD).distribute(3);
-// [$33.34, $33.33, $33.33] - no cents lost!`}</code>
-        </pre>
+// [$33.34, $33.33, $33.33] - no cents lost!`}
+        >{`import { Money, COP, USD, MXN } from 'soff-money';
+
+// Create money from decimal
+const price = Money.fromDecimal(1500000, COP);
+price.format();  // '$ 1.500.000'
+
+// Create from cents (smallest unit)
+const cents = Money.fromCents(10050, USD);
+cents.format();  // '$100.50'
+
+// Arithmetic (immutable - returns new instance)
+const total = price.add(Money.fromDecimal(500000, COP));
+total.format();  // '$ 2.000.000'
+
+// Distribution without losing cents
+const shares = Money.fromDecimal(100, USD).distribute(3);
+// [$33.34, $33.33, $33.33] - no cents lost!`}</CodeBlock>
       </section>
 
       {/* Key Features */}
@@ -207,21 +223,28 @@ const shares = Money.fromDecimal(100, USD).distribute(3);
           </TabsList>
 
           <TabsContent value="creation" className="mt-4">
-            <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-              <code>{`// From decimal amount
+            <CodeBlock
+              code={`// From decimal amount
 Money.fromDecimal(100.50, USD)    // $100.50
 
 // From cents (smallest unit)
 Money.fromCents(10050, USD)       // $100.50
 
 // Zero money
-Money.zero(USD)                   // $0.00`}</code>
-            </pre>
+Money.zero(USD)                   // $0.00`}
+            >{`// From decimal amount
+Money.fromDecimal(100.50, USD)    // $100.50
+
+// From cents (smallest unit)
+Money.fromCents(10050, USD)       // $100.50
+
+// Zero money
+Money.zero(USD)                   // $0.00`}</CodeBlock>
           </TabsContent>
 
           <TabsContent value="arithmetic" className="mt-4">
-            <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-              <code>{`const a = Money.fromDecimal(100, USD);
+            <CodeBlock
+              code={`const a = Money.fromDecimal(100, USD);
 const b = Money.fromDecimal(50, USD);
 
 a.add(b)          // $150.00
@@ -233,13 +256,25 @@ a.negate()        // -$100.00
 
 // Distribution
 a.distribute(3)              // [$33.34, $33.33, $33.33]
-a.distributeByRatios([1,2,2]) // [$20.00, $40.00, $40.00]`}</code>
-            </pre>
+a.distributeByRatios([1,2,2]) // [$20.00, $40.00, $40.00]`}
+            >{`const a = Money.fromDecimal(100, USD);
+const b = Money.fromDecimal(50, USD);
+
+a.add(b)          // $150.00
+a.subtract(b)     // $50.00
+a.multiply(2)     // $200.00
+a.divide(4)       // $25.00
+a.abs()           // absolute value
+a.negate()        // -$100.00
+
+// Distribution
+a.distribute(3)              // [$33.34, $33.33, $33.33]
+a.distributeByRatios([1,2,2]) // [$20.00, $40.00, $40.00]`}</CodeBlock>
           </TabsContent>
 
           <TabsContent value="comparison" className="mt-4">
-            <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-              <code>{`const a = Money.fromDecimal(100, USD);
+            <CodeBlock
+              code={`const a = Money.fromDecimal(100, USD);
 const b = Money.fromDecimal(50, USD);
 
 a.equals(b)              // false
@@ -250,13 +285,24 @@ a.lessThanOrEqual(b)     // false
 
 a.isZero()      // false
 a.isPositive()  // true
-a.isNegative()  // false`}</code>
-            </pre>
+a.isNegative()  // false`}
+            >{`const a = Money.fromDecimal(100, USD);
+const b = Money.fromDecimal(50, USD);
+
+a.equals(b)              // false
+a.greaterThan(b)         // true
+a.lessThan(b)            // false
+a.greaterThanOrEqual(b)  // true
+a.lessThanOrEqual(b)     // false
+
+a.isZero()      // false
+a.isPositive()  // true
+a.isNegative()  // false`}</CodeBlock>
           </TabsContent>
 
           <TabsContent value="formatting" className="mt-4">
-            <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-              <code>{`const price = Money.fromDecimal(1500.50, USD);
+            <CodeBlock
+              code={`const price = Money.fromDecimal(1500.50, USD);
 
 price.format()                          // '$1,500.50'
 price.format({ showSymbol: false })     // '1,500.50'
@@ -266,8 +312,18 @@ price.format({ symbolPosition: 'after' }) // '1,500.50 $'
 price.toDecimal()  // 1500.50
 price.cents        // 150050
 price.toJSON()     // { cents: 150050, currency: 'USD' }
-price.toString()   // '$1,500.50'`}</code>
-            </pre>
+price.toString()   // '$1,500.50'`}
+            >{`const price = Money.fromDecimal(1500.50, USD);
+
+price.format()                          // '$1,500.50'
+price.format({ showSymbol: false })     // '1,500.50'
+price.format({ showDecimals: false })   // '$1,501'
+price.format({ symbolPosition: 'after' }) // '1,500.50 $'
+
+price.toDecimal()  // 1500.50
+price.cents        // 150050
+price.toJSON()     // { cents: 150050, currency: 'USD' }
+price.toString()   // '$1,500.50'`}</CodeBlock>
           </TabsContent>
         </Tabs>
       </section>
@@ -275,8 +331,8 @@ price.toString()   // '$1,500.50'`}</code>
       {/* Common Patterns */}
       <section>
         <h2 className="mb-4 text-2xl font-semibold">Common Patterns</h2>
-        <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-          <code>{`// Shopping cart total
+        <CodeBlock
+          code={`// Shopping cart total
 const items = [
   Money.fromDecimal(29.99, USD),
   Money.fromDecimal(49.99, USD),
@@ -293,8 +349,25 @@ const tax = final.multiply(0.19);  // 19% IVA
 const withTax = final.add(tax);
 
 // Split bill
-const perPerson = withTax.distribute(4);  // 4 people`}</code>
-        </pre>
+const perPerson = withTax.distribute(4);  // 4 people`}
+        >{`// Shopping cart total
+const items = [
+  Money.fromDecimal(29.99, USD),
+  Money.fromDecimal(49.99, USD),
+  Money.fromDecimal(19.99, USD),
+];
+const total = items.reduce((sum, item) => sum.add(item), Money.zero(USD));
+
+// Apply discount
+const discount = total.multiply(0.10);  // 10% off
+const final = total.subtract(discount);
+
+// Tax calculation
+const tax = final.multiply(0.19);  // 19% IVA
+const withTax = final.add(tax);
+
+// Split bill
+const perPerson = withTax.distribute(4);  // 4 people`}</CodeBlock>
       </section>
     </article>
   );

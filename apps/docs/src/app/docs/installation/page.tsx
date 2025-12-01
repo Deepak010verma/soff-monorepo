@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { CodeBlock } from '@/components/code-block';
 
 export const metadata = {
   title: 'Installation - Soff Libraries',
@@ -24,8 +25,8 @@ export default function InstallationPage() {
         </TabsList>
 
         <TabsContent value="npm" className="mt-4">
-          <pre className="rounded-lg bg-muted p-4">
-            <code>{`# Holiday calculator
+          <CodeBlock
+            code={`# Holiday calculator
 npm install soff-date
 
 # Document validation
@@ -35,13 +36,23 @@ npm install soff-id
 npm install soff-mask
 
 # Currency formatting
-npm install soff-money`}</code>
-          </pre>
+npm install soff-money`}
+          >{`# Holiday calculator
+npm install soff-date
+
+# Document validation
+npm install soff-id
+
+# Input masking
+npm install soff-mask
+
+# Currency formatting
+npm install soff-money`}</CodeBlock>
         </TabsContent>
 
         <TabsContent value="pnpm" className="mt-4">
-          <pre className="rounded-lg bg-muted p-4">
-            <code>{`# Holiday calculator
+          <CodeBlock
+            code={`# Holiday calculator
 pnpm add soff-date
 
 # Document validation
@@ -51,13 +62,23 @@ pnpm add soff-id
 pnpm add soff-mask
 
 # Currency formatting
-pnpm add soff-money`}</code>
-          </pre>
+pnpm add soff-money`}
+          >{`# Holiday calculator
+pnpm add soff-date
+
+# Document validation
+pnpm add soff-id
+
+# Input masking
+pnpm add soff-mask
+
+# Currency formatting
+pnpm add soff-money`}</CodeBlock>
         </TabsContent>
 
         <TabsContent value="yarn" className="mt-4">
-          <pre className="rounded-lg bg-muted p-4">
-            <code>{`# Holiday calculator
+          <CodeBlock
+            code={`# Holiday calculator
 yarn add soff-date
 
 # Document validation
@@ -67,13 +88,23 @@ yarn add soff-id
 yarn add soff-mask
 
 # Currency formatting
-yarn add soff-money`}</code>
-          </pre>
+yarn add soff-money`}
+          >{`# Holiday calculator
+yarn add soff-date
+
+# Document validation
+yarn add soff-id
+
+# Input masking
+yarn add soff-mask
+
+# Currency formatting
+yarn add soff-money`}</CodeBlock>
         </TabsContent>
 
         <TabsContent value="bun" className="mt-4">
-          <pre className="rounded-lg bg-muted p-4">
-            <code>{`# Holiday calculator
+          <CodeBlock
+            code={`# Holiday calculator
 bun add soff-date
 
 # Document validation
@@ -83,8 +114,18 @@ bun add soff-id
 bun add soff-mask
 
 # Currency formatting
-bun add soff-money`}</code>
-          </pre>
+bun add soff-money`}
+          >{`# Holiday calculator
+bun add soff-date
+
+# Document validation
+bun add soff-id
+
+# Input masking
+bun add soff-mask
+
+# Currency formatting
+bun add soff-money`}</CodeBlock>
         </TabsContent>
       </Tabs>
 
@@ -102,25 +143,37 @@ bun add soff-money`}</code>
         size:
       </p>
 
-      <pre className="not-prose rounded-lg bg-muted p-4">
-        <code>{`// ✅ Good - only Colombia is bundled (~3KB)
+      <div className="not-prose">
+        <CodeBlock
+          code={`// ✅ Good - only Colombia is bundled (~3KB)
 import { getHolidays } from 'soff-date/locales/co';
 
 // ❌ Avoid - imports all locales
-import { getHolidays } from 'soff-date';`}</code>
-      </pre>
+import { getHolidays } from 'soff-date';`}
+        >{`// ✅ Good - only Colombia is bundled (~3KB)
+import { getHolidays } from 'soff-date/locales/co';
+
+// ❌ Avoid - imports all locales
+import { getHolidays } from 'soff-date';`}</CodeBlock>
+      </div>
 
       <h2>ESM & CommonJS</h2>
 
       <p>All libraries ship both ESM and CommonJS builds:</p>
 
-      <pre className="not-prose rounded-lg bg-muted p-4">
-        <code>{`// ESM
+      <div className="not-prose">
+        <CodeBlock
+          code={`// ESM
 import { validateNIT } from 'soff-id/locales/co';
 
 // CommonJS
-const { validateNIT } = require('soff-id/locales/co');`}</code>
-      </pre>
+const { validateNIT } = require('soff-id/locales/co');`}
+        >{`// ESM
+import { validateNIT } from 'soff-id/locales/co';
+
+// CommonJS
+const { validateNIT } = require('soff-id/locales/co');`}</CodeBlock>
+      </div>
     </article>
   );
 }

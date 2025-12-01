@@ -94,8 +94,8 @@ export default function SoffMaskPage() {
       {/* Quick Start */}
       <section>
         <h2 className="mb-4 text-2xl font-semibold">Quick Start</h2>
-        <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-          <code>{`import { mask, unmask, maskWithResult } from 'soff-mask';
+        <CodeBlock
+          code={`import { mask, unmask, maskWithResult } from 'soff-mask';
 import { phoneCO, cpf, creditCard } from 'soff-mask';
 
 // Apply a mask
@@ -110,8 +110,23 @@ maskWithResult('300123', phoneCO);
 // { value: '(300) 123', raw: '300123', complete: false, cursorPosition: 9 }
 
 // Custom pattern
-mask('ABC123', 'AAA-###');           // 'ABC-123'`}</code>
-        </pre>
+mask('ABC123', 'AAA-###');           // 'ABC-123'`}
+        >{`import { mask, unmask, maskWithResult } from 'soff-mask';
+import { phoneCO, cpf, creditCard } from 'soff-mask';
+
+// Apply a mask
+mask('3001234567', phoneCO);        // '(300) 123 4567'
+mask('12345678909', cpf);            // '123.456.789-09'
+
+// Remove mask
+unmask('(300) 123 4567', phoneCO);   // '3001234567'
+
+// Get detailed result
+maskWithResult('300123', phoneCO);
+// { value: '(300) 123', raw: '300123', complete: false, cursorPosition: 9 }
+
+// Custom pattern
+mask('ABC123', 'AAA-###');           // 'ABC-123'`}</CodeBlock>
       </section>
 
       {/* Pattern Tokens */}
@@ -260,8 +275,8 @@ mask('ABC123', 'AAA-###');           // 'ABC-123'`}</code>
       {/* DOM Integration */}
       <section>
         <h2 className="mb-4 text-2xl font-semibold">DOM Integration</h2>
-        <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-          <code>{`import { maskInput, createMaskController } from 'soff-mask';
+        <CodeBlock
+          code={`import { maskInput, createMaskController } from 'soff-mask';
 import { phoneCO } from 'soff-mask';
 
 // Vanilla JS - Apply to an input element
@@ -283,15 +298,37 @@ function PhoneInput() {
   };
   
   return <input value={value} onChange={handleChange} />;
-}`}</code>
-        </pre>
+}`}
+        >{`import { maskInput, createMaskController } from 'soff-mask';
+import { phoneCO } from 'soff-mask';
+
+// Vanilla JS - Apply to an input element
+const input = document.querySelector('input');
+const controller = maskInput(input, { pattern: phoneCO });
+
+// Get raw value
+controller.getRawValue();  // '3001234567'
+
+// Cleanup
+controller.destroy();
+
+// React usage (controlled)
+function PhoneInput() {
+  const [value, setValue] = useState('');
+  
+  const handleChange = (e) => {
+    setValue(mask(e.target.value, phoneCO));
+  };
+  
+  return <input value={value} onChange={handleChange} />;
+}`}</CodeBlock>
       </section>
 
       {/* API Reference */}
       <section>
         <h2 className="mb-4 text-2xl font-semibold">API Reference</h2>
-        <pre className="overflow-x-auto rounded-lg bg-muted p-4 text-sm">
-          <code>{`// Core functions
+        <CodeBlock
+          code={`// Core functions
 mask(value: string, pattern: string, options?: MaskOptions): string
 unmask(value: string, pattern: string): string
 maskWithResult(value: string, pattern: string): MaskResult
@@ -310,8 +347,27 @@ interface MaskResult {
   raw: string;        // Raw value without mask
   complete: boolean;  // True if all positions filled
   cursorPosition: number;
-}`}</code>
-        </pre>
+}`}
+        >{`// Core functions
+mask(value: string, pattern: string, options?: MaskOptions): string
+unmask(value: string, pattern: string): string
+maskWithResult(value: string, pattern: string): MaskResult
+
+// Utilities
+parsePattern(pattern: string): MaskToken[]
+isComplete(value: string, pattern: string): boolean
+getPatternLength(pattern: string): number
+createDynamicMask(rules: DynamicMaskRule[]): (value: string) => string
+
+// DOM
+maskInput(element: HTMLInputElement, options: MaskInputOptions): MaskController
+
+interface MaskResult {
+  value: string;      // Masked value
+  raw: string;        // Raw value without mask
+  complete: boolean;  // True if all positions filled
+  cursorPosition: number;
+}`}</CodeBlock>
       </section>
     </article>
   );

@@ -219,20 +219,25 @@ validateCUIT('20-12345678-9');     // true/false`}</CodeBlock>
 
           <TabsContent value="co" className="mt-4 space-y-4">
             <h3 className="text-lg font-semibold">Colombia - NIT</h3>
-            <pre className="rounded-lg bg-muted p-4 text-sm">
-              <code>{`import { validateNIT, formatNIT, cleanNIT, calculateNITCheckDigit } from 'soff-id/locales/co';
+            <CodeBlock
+              code={`import { validateNIT, formatNIT, cleanNIT, calculateNITCheckDigit } from 'soff-id/locales/co';
 
 validateNIT('900123456-7')         // boolean
 formatNIT('9001234567')            // '900.123.456-7'
 cleanNIT('900.123.456-7')          // '9001234567'
-calculateNITCheckDigit('900123456') // '7'`}</code>
-            </pre>
+calculateNITCheckDigit('900123456') // '7'`}
+            >{`import { validateNIT, formatNIT, cleanNIT, calculateNITCheckDigit } from 'soff-id/locales/co';
+
+validateNIT('900123456-7')         // boolean
+formatNIT('9001234567')            // '900.123.456-7'
+cleanNIT('900.123.456-7')          // '9001234567'
+calculateNITCheckDigit('900123456') // '7'`}</CodeBlock>
           </TabsContent>
 
           <TabsContent value="br" className="mt-4 space-y-4">
             <h3 className="text-lg font-semibold">Brasil - CPF & CNPJ</h3>
-            <pre className="rounded-lg bg-muted p-4 text-sm">
-              <code>{`import { validateCPF, formatCPF, validateCNPJ, formatCNPJ } from 'soff-id/locales/br';
+            <CodeBlock
+              code={`import { validateCPF, formatCPF, validateCNPJ, formatCNPJ } from 'soff-id/locales/br';
 
 // CPF (Individual)
 validateCPF('123.456.789-09')      // boolean
@@ -240,44 +245,67 @@ formatCPF('12345678909')           // '123.456.789-09'
 
 // CNPJ (Business)
 validateCNPJ('12.345.678/0001-95') // boolean
-formatCNPJ('12345678000195')       // '12.345.678/0001-95'`}</code>
-            </pre>
+formatCNPJ('12345678000195')       // '12.345.678/0001-95'`}
+            >{`import { validateCPF, formatCPF, validateCNPJ, formatCNPJ } from 'soff-id/locales/br';
+
+// CPF (Individual)
+validateCPF('123.456.789-09')      // boolean
+formatCPF('12345678909')           // '123.456.789-09'
+
+// CNPJ (Business)
+validateCNPJ('12.345.678/0001-95') // boolean
+formatCNPJ('12345678000195')       // '12.345.678/0001-95'`}</CodeBlock>
           </TabsContent>
 
           <TabsContent value="ar" className="mt-4 space-y-4">
             <h3 className="text-lg font-semibold">Argentina - CUIT & CUIL</h3>
-            <pre className="rounded-lg bg-muted p-4 text-sm">
-              <code>{`import { validateCUIT, formatCUIT, validateCUIL } from 'soff-id/locales/ar';
+            <CodeBlock
+              code={`import { validateCUIT, formatCUIT, validateCUIL } from 'soff-id/locales/ar';
 
 validateCUIT('20-12345678-9')      // boolean
 formatCUIT('20123456789')          // '20-12345678-9'
-validateCUIL('20-12345678-9')      // boolean (same algorithm)`}</code>
-            </pre>
+validateCUIL('20-12345678-9')      // boolean (same algorithm)`}
+            >{`import { validateCUIT, formatCUIT, validateCUIL } from 'soff-id/locales/ar';
+
+validateCUIT('20-12345678-9')      // boolean
+formatCUIT('20123456789')          // '20-12345678-9'
+validateCUIL('20-12345678-9')      // boolean (same algorithm)`}</CodeBlock>
           </TabsContent>
 
           <TabsContent value="cl" className="mt-4 space-y-4">
             <h3 className="text-lg font-semibold">Chile - RUT</h3>
-            <pre className="rounded-lg bg-muted p-4 text-sm">
-              <code>{`import { validateRUT, formatRUT, calculateRUTCheckDigit } from 'soff-id/locales/cl';
+            <CodeBlock
+              code={`import { validateRUT, formatRUT, calculateRUTCheckDigit } from 'soff-id/locales/cl';
 
 validateRUT('12.345.678-5')         // boolean
 formatRUT('123456785')              // '12.345.678-5'
-calculateRUTCheckDigit('12345678')  // '5'`}</code>
-            </pre>
+calculateRUTCheckDigit('12345678')  // '5'`}
+            >{`import { validateRUT, formatRUT, calculateRUTCheckDigit } from 'soff-id/locales/cl';
+
+validateRUT('12.345.678-5')         // boolean
+formatRUT('123456785')              // '12.345.678-5'
+calculateRUTCheckDigit('12345678')  // '5'`}</CodeBlock>
           </TabsContent>
 
           <TabsContent value="mx" className="mt-4 space-y-4">
             <h3 className="text-lg font-semibold">México - RFC & CURP</h3>
-            <pre className="rounded-lg bg-muted p-4 text-sm">
-              <code>{`import { validateRFC, validateCURP } from 'soff-id/locales/mx';
+            <CodeBlock
+              code={`import { validateRFC, validateCURP } from 'soff-id/locales/mx';
 
 // RFC (Tax ID)
 validateRFC('XAXX010101000')       // boolean (generic)
 validateRFC('GODE561231GR8')       // boolean (individual)
 
 // CURP (Personal ID)
-validateCURP('GODE561231HDFRRN09') // boolean`}</code>
-            </pre>
+validateCURP('GODE561231HDFRRN09') // boolean`}
+            >{`import { validateRFC, validateCURP } from 'soff-id/locales/mx';
+
+// RFC (Tax ID)
+validateRFC('XAXX010101000')       // boolean (generic)
+validateRFC('GODE561231GR8')       // boolean (individual)
+
+// CURP (Personal ID)
+validateCURP('GODE561231HDFRRN09') // boolean`}</CodeBlock>
           </TabsContent>
         </Tabs>
       </section>
