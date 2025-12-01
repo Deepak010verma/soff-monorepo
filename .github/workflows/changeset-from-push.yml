@@ -1,0 +1,122 @@
+name: Changeset from Direct Push
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'packages/**'
+
+jobs:
+  create-changeset:
+    # Skip if commit is from bot (to avoid loops)
+    if: |
+      !contains(github.event.head_commit.author.name, 'github-actions') &&
+      !contains(github.event.head_commit.message, 'chore: add changeset') &&
+      !contains(github.event.head_commit.message, 'chore: version packages')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check if changeset already exists for this commit
+        id: check
+        run: |
+          # Check if any changeset was added in this commit
+          CHANGESET_ADDED=$(git diff --name-only HEAD~1 HEAD | grep "^\.changeset/.*\.md$" | grep -v "README.md" || true)
+          if [ -n "$CHANGESET_ADDED" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Changeset already exists in this commit"
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Determine version bump from commit message
+        if: steps.check.outputs.skip != 'true'
+        id: bump
+        run: |
+          MESSAGE="${{ github.event.head_commit.message }}"
+          # Get first line only
+          TITLE=$(echo "$MESSAGE" | head -n 1)
+
+          # Check for breaking change indicator
+          if [[ "$TITLE" == *"!"* ]] || [[ "$TITLE" == *"BREAKING"* ]]; then
+            echo "type=major" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" =~ ^feat ]]; then
+            echo "type=minor" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE" =~ ^(fix|perf|refactor|style|docs|test|chore|ci|build) ]]; then
+            echo "type=patch" >> $GITHUB_OUTPUT
+          else
+            echo "type=patch" >> $GITHUB_OUTPUT
+          fi
+
+          # Extract description (remove conventional commit prefix)
+          DESC=$(echo "$TITLE" | sed -E 's/^(feat|fix|perf|refactor|style|docs|test|chore|ci|build)(\([^)]*\))?!?:\s*//')
+          echo "description=$DESC" >> $GITHUB_OUTPUT
+
+      - name: Determine affected packages from changed files
+        if: steps.check.outputs.skip != 'true'
+        id: packages
+        run: |
+          PACKAGES=""
+
+          # Get changed files in this commit
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
+
+          if echo "$CHANGED_FILES" | grep -q "^packages/soff-date/"; then
+            PACKAGES="$PACKAGES soff-date"
+          fi
+          if echo "$CHANGED_FILES" | grep -q "^packages/soff-id/"; then
+            PACKAGES="$PACKAGES soff-id"
+          fi
+          if echo "$CHANGED_FILES" | grep -q "^packages/soff-mask/"; then
+            PACKAGES="$PACKAGES soff-mask"
+          fi
+          if echo "$CHANGED_FILES" | grep -q "^packages/soff-money/"; then
+            PACKAGES="$PACKAGES soff-money"
+          fi
+
+          echo "list=$PACKAGES" >> $GITHUB_OUTPUT
+          echo "Affected packages: $PACKAGES"
+
+      - name: Create changeset file
+        if: steps.check.outputs.skip != 'true' && steps.packages.outputs.list != ''
+        run: |
+          PACKAGES="${{ steps.packages.outputs.list }}"
+          TYPE="${{ steps.bump.outputs.type }}"
+          DESC="${{ steps.bump.outputs.description }}"
+          SHORT_SHA="${{ github.sha }}"
+          SHORT_SHA=${SHORT_SHA:0:7}
+
+          # Generate unique filename
+          FILENAME=".changeset/push-${SHORT_SHA}-$(date +%s).md"
+
+          # Create changeset content
+          echo "---" > "$FILENAME"
+          for pkg in $PACKAGES; do
+            echo "\"$pkg\": $TYPE" >> "$FILENAME"
+          done
+          echo "---" >> "$FILENAME"
+          echo "" >> "$FILENAME"
+          echo "$DESC" >> "$FILENAME"
+
+          echo "Created changeset:"
+          cat "$FILENAME"
+
+      - name: Commit and push changeset
+        if: steps.check.outputs.skip != 'true' && steps.packages.outputs.list != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .changeset/
+          git commit -m "chore: add changeset for commit ${{ github.sha }}"
+          git push
