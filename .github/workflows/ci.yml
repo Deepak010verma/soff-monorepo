@@ -29,32 +29,16 @@ jobs:
         run: npm ci
 
       - name: Type check
-        run: npm run typecheck
+        run: npm run type-check
 
       - name: Lint
         run: npm run lint
 
       - name: Run tests
-        run: npm run test:coverage
+        run: npm run test
 
       - name: Build
         run: npm run build
-
-      - name: Upload coverage
-        if: matrix.node-version == 20
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
-
-      - name: Lint commits
-        if: matrix.node-version == 20
-        run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
-          else
-            npx commitlint --last --verbose
-          fi
 
   check-passed:
     needs: test
@@ -63,7 +47,7 @@ jobs:
     steps:
       - name: Check status
         run: |
-          if [[ ${{ needs.test.result }} == 'success' ]]; then
+          if [[ "${{ needs.test.result }}" == "success" ]]; then
             exit 0
           else
             exit 1

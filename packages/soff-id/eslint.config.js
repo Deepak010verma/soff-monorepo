@@ -1,21 +1,21 @@
-import eslint from '@eslint/js';
+import js from '@eslint/js';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
-  { ignores: ['dist', 'coverage', 'node_modules', '*.config.ts', '*.config.js'] },
+  { ignores: ['dist', 'coverage'] },
   {
-    extends: [eslint.configs.recommended, ...tseslint.configs.recommended, eslintConfigPrettier],
-    files: ['**/*.{ts,tsx}'],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended, prettier],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
-      parserOptions: {
-        project: './tsconfig.json',
-        tsconfigRootDir: import.meta.dirname,
-      },
+      ecmaVersion: 2020,
+      globals: globals.node,
     },
     rules: {
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
     },
-  }
+  },
 );
