@@ -1,0 +1,106 @@
+{
+  "name": "soff-mask",
+  "version": "0.1.0",
+  "description": "Lightweight, framework-agnostic input masking library",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./core": {
+      "import": {
+        "types": "./dist/core/index.d.ts",
+        "default": "./dist/core/index.js"
+      },
+      "require": {
+        "types": "./dist/core/index.d.cts",
+        "default": "./dist/core/index.cjs"
+      }
+    },
+    "./masks": {
+      "import": {
+        "types": "./dist/masks/index.d.ts",
+        "default": "./dist/masks/index.js"
+      },
+      "require": {
+        "types": "./dist/masks/index.d.cts",
+        "default": "./dist/masks/index.cjs"
+      }
+    },
+    "./dom": {
+      "import": {
+        "types": "./dist/dom/index.d.ts",
+        "default": "./dist/dom/index.js"
+      },
+      "require": {
+        "types": "./dist/dom/index.d.cts",
+        "default": "./dist/dom/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "clean": "rimraf dist coverage .turbo"
+  },
+  "keywords": [
+    "mask",
+    "input",
+    "formatting",
+    "vanilla",
+    "typescript",
+    "tree-shaking",
+    "phone",
+    "credit-card",
+    "date",
+    "framework-agnostic",
+    "lightweight"
+  ],
+  "author": "Luis C. Rojas",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bledxs/soff-monorepo.git",
+    "directory": "packages/soff-mask"
+  },
+  "bugs": {
+    "url": "https://github.com/bledxs/soff-monorepo/issues"
+  },
+  "homepage": "https://github.com/bledxs/soff-monorepo/tree/main/packages/soff-mask#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@soff/tsconfig": "*",
+    "@vitest/coverage-v8": "^4.0.14",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.5.0",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.0",
+    "vitest": "^4.0.14"
+  }
+}
