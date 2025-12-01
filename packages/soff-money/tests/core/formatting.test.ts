@@ -1,10 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { Money } from '../../src/core/money.js';
 import { USD } from '../../src/locales/us.js';
-import { COP } from '../../src/locales/co.js';
+import { COP, COP_NO_DECIMALS } from '../../src/locales/co.js';
 import { BRL } from '../../src/locales/br.js';
 import { MXN } from '../../src/locales/mx.js';
 import { ARS } from '../../src/locales/ar.js';
+import { CLP } from '../../src/locales/cl.js';
+import { PEN } from '../../src/locales/pe.js';
+import { UYU } from '../../src/locales/uy.js';
+import { EUR } from '../../src/locales/eu.js';
 
 describe('Money formatting', () => {
   describe('USD formatting', () => {
@@ -59,6 +63,56 @@ describe('Money formatting', () => {
     it('should format with space and period separator', () => {
       const money = Money.fromCents(100050, ARS);
       expect(money.format()).toBe('$ 1.000,50');
+    });
+  });
+
+  describe('CLP formatting', () => {
+    it('should format without decimals', () => {
+      const money = Money.fromCents(150000, CLP); // CLP has 0 decimals
+      expect(money.format()).toBe('$ 150.000');
+    });
+
+    it('should format large amounts', () => {
+      const money = Money.fromCents(1500000, CLP);
+      expect(money.format()).toBe('$ 1.500.000');
+    });
+  });
+
+  describe('COP_NO_DECIMALS formatting', () => {
+    it('should format without decimals', () => {
+      const money = Money.fromCents(150000, COP_NO_DECIMALS);
+      expect(money.format()).toBe('$ 150.000');
+    });
+  });
+
+  describe('PEN formatting', () => {
+    it('should format with S/ symbol', () => {
+      const money = Money.fromCents(100050, PEN);
+      expect(money.format()).toBe('S/ 1,000.50');
+    });
+  });
+
+  describe('UYU formatting', () => {
+    it('should format with period separator', () => {
+      const money = Money.fromCents(100050, UYU);
+      expect(money.format()).toBe('$ 1.000,50');
+    });
+  });
+
+  describe('EUR formatting', () => {
+    it('should format with symbol after', () => {
+      const money = Money.fromCents(100050, EUR);
+      expect(money.format()).toBe('1.000,50 €');
+    });
+
+    it('should format without symbol', () => {
+      const money = Money.fromCents(100050, EUR);
+      expect(money.format({ showSymbol: false })).toBe('1.000,50');
+    });
+
+    it('should override symbol position', () => {
+      const money = Money.fromCents(100050, EUR);
+      expect(money.format({ symbolPosition: 'before' })).toBe('€ 1.000,50');
     });
   });
 

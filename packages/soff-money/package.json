@@ -77,6 +77,46 @@
         "types": "./dist/locales/us.d.cts",
         "default": "./dist/locales/us.cjs"
       }
+    },
+    "./locales/cl": {
+      "import": {
+        "types": "./dist/locales/cl.d.ts",
+        "default": "./dist/locales/cl.js"
+      },
+      "require": {
+        "types": "./dist/locales/cl.d.cts",
+        "default": "./dist/locales/cl.cjs"
+      }
+    },
+    "./locales/pe": {
+      "import": {
+        "types": "./dist/locales/pe.d.ts",
+        "default": "./dist/locales/pe.js"
+      },
+      "require": {
+        "types": "./dist/locales/pe.d.cts",
+        "default": "./dist/locales/pe.cjs"
+      }
+    },
+    "./locales/uy": {
+      "import": {
+        "types": "./dist/locales/uy.d.ts",
+        "default": "./dist/locales/uy.js"
+      },
+      "require": {
+        "types": "./dist/locales/uy.d.cts",
+        "default": "./dist/locales/uy.cjs"
+      }
+    },
+    "./locales/eu": {
+      "import": {
+        "types": "./dist/locales/eu.d.ts",
+        "default": "./dist/locales/eu.js"
+      },
+      "require": {
+        "types": "./dist/locales/eu.d.cts",
+        "default": "./dist/locales/eu.cjs"
+      }
     }
   },
   "files": [

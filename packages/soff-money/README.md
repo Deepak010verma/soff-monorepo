@@ -8,19 +8,30 @@
 
 Safe money handling for JavaScript with integer-based arithmetic and LATAM locale formatting.
 
-**Zero dependencies** · **TypeScript** · **~6KB core**
+**Zero dependencies** · **TypeScript** · **~8KB core**
 
 ## Table of Contents
 
-- [Why?](#why)
-- [Install](#install)
-- [Quick Start](#quick-start)
-- [Fair Distribution](#fair-distribution)
-- [Available Locales](#available-locales)
-- [API Reference](#api-reference)
-- [Bundle Size](#bundle-size)
-- [Contributing](#contributing)
-- [License](#license)
+- [Soff Money](#soff-money)
+  - [Table of Contents](#table-of-contents)
+  - [Why?](#why)
+  - [Install](#install)
+  - [Quick Start](#quick-start)
+  - [Fair Distribution](#fair-distribution)
+    - [Proportional Distribution](#proportional-distribution)
+  - [Available Locales](#available-locales)
+  - [API Reference](#api-reference)
+    - [Creating Money](#creating-money)
+    - [Arithmetic Operations](#arithmetic-operations)
+    - [Percentage Operations](#percentage-operations)
+    - [Min/Max Operations](#minmax-operations)
+    - [Comparisons](#comparisons)
+    - [Formatting](#formatting)
+  - [Static Methods](#static-methods)
+  - [Bundle Size](#bundle-size)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Documentation](#documentation)
 
 ## Why?
 
@@ -43,12 +54,12 @@ import { Money, COP, USD } from 'soff-money';
 const price = Money.fromDecimal(1500000, COP);
 
 // Arithmetic operations (all return new Money instances)
-const withTax = price.multiply(1.19); // Add 19% tax
-const discounted = withTax.multiply(0.9); // 10% discount
+const withTax = price.addPercentage(19); // Add 19% tax
+const discounted = withTax.subtractPercentage(10); // 10% discount
 
 // Format for display
-console.log(price.format()); // "$ 1.500.000"
-console.log(discounted.format()); // "$ 1.606.500"
+console.log(price.format()); // "$ 1.500.000,00"
+console.log(discounted.format()); // "$ 1.606.500,00"
 
 // Safe comparisons
 price.equals(Money.fromDecimal(1500000, COP)); // true
@@ -60,7 +71,7 @@ price.greaterThan(discounted); // false
 When splitting money, you never lose cents:
 
 ```typescript
-const bill = Money.fromDecimal(100, COP);
+const bill = Money.fromDecimal(100, USD);
 const [alice, bob, charlie] = bill.distribute(3);
 
 // alice:   $33.34
@@ -75,10 +86,11 @@ The extra cent goes to the first person - no money is lost!
 
 ```typescript
 const total = Money.fromDecimal(100, USD);
-const [share1, share2] = total.distributeBy([70, 30]);
+const [share1, share2, share3] = total.distributeByRatios([1, 2, 2]);
 
-// share1: $70.00 (70%)
-// share2: $30.00 (30%)
+// share1: $20.00 (20%)
+// share2: $40.00 (40%)
+// share3: $40.00 (40%)
 ```
 
 ## Available Locales
@@ -90,6 +102,10 @@ const [share1, share2] = total.distributeBy([70, 30]);
 | 🇦🇷 Argentina | `soff-money/locales/ar` | ARS      | $      | $ 1.500,00  |
 | 🇧🇷 Brasil    | `soff-money/locales/br` | BRL      | R$     | R$ 1.500,00 |
 | 🇺🇸 USA       | `soff-money/locales/us` | USD      | $      | $1,500.00   |
+| 🇨🇱 Chile     | `soff-money/locales/cl` | CLP      | $      | $ 1.500     |
+| 🇵🇪 Perú      | `soff-money/locales/pe` | PEN      | S/     | S/ 1,500.00 |
+| 🇺🇾 Uruguay   | `soff-money/locales/uy` | UYU      | $      | $ 1.500,00  |
+| 🇪🇺 Euro      | `soff-money/locales/eu` | EUR      | €      | 1.500,00 €  |
 
 ## API Reference
 
@@ -111,17 +127,42 @@ Money.zero(COP);
 All operations return new Money instances (immutable):
 
 ```typescript
-const a = Money.fromDecimal(100, COP);
-const b = Money.fromDecimal(50, COP);
+const a = Money.fromDecimal(100, USD);
+const b = Money.fromDecimal(50, USD);
 
 a.add(b); // $150
 a.subtract(b); // $50
 a.multiply(2); // $200
 a.multiply(0.5); // $50
 a.divide(2); // $50
-a.percentage(10); // $10 (10% of a)
 a.negate(); // -$100
 a.abs(); // $100 (absolute value)
+```
+
+### Percentage Operations
+
+```typescript
+const price = Money.fromDecimal(100, USD);
+
+price.percentage(10); // $10.00 (10% of price)
+price.addPercentage(19); // $119.00 (price + 19% tax)
+price.subtractPercentage(10); // $90.00 (price - 10% discount)
+```
+
+### Min/Max Operations
+
+```typescript
+const a = Money.fromDecimal(100, USD);
+const b = Money.fromDecimal(50, USD);
+
+a.min(b); // $50 (minimum of a and b)
+a.max(b); // $100 (maximum of a and b)
+
+const min = Money.fromDecimal(10, USD);
+const max = Money.fromDecimal(100, USD);
+a.clamp(min, max); // $100 (clamp a between min and max)
+
+a.isBetween(min, max); // true (check if a is in range)
 ```
 
 ### Comparisons
@@ -140,25 +181,40 @@ a.isNegative(); // false
 ### Formatting
 
 ```typescript
-const price = Money.fromDecimal(1500000, COP);
+const price = Money.fromDecimal(1500.5, USD);
 
-price.format(); // "$ 1.500.000"
-price.toDecimal(); // 1500000
-price.toCents(); // 150000000
-price.toString(); // "COP 1500000.00"
+price.format(); // "$1,500.50"
+price.format({ showSymbol: false }); // "1,500.50"
+price.format({ showDecimals: false }); // "$1,501"
+price.format({ symbolPosition: 'after' }); // "1,500.50 $"
+price.toDecimal(); // 1500.50
+price.toCents(); // 150050
+price.toJSON(); // { cents: 150050, currency: 'USD' }
+```
+
+## Static Methods
+
+```typescript
+// Sum multiple values
+const items = [Money.fromDecimal(100, USD), Money.fromDecimal(50, USD), Money.fromDecimal(25, USD)];
+
+Money.sum(items); // $175.00
+
+// Get min/max from array
+Money.minimum(items); // $25.00
+Money.maximum(items); // $100.00
+
+// Calculate average
+Money.average(items); // $58.33
 ```
 
 ## Bundle Size
 
 | Import       | Size (minified) |
 | ------------ | --------------- |
-| `core`       | ~6.2KB          |
-| `locales/co` | ~0.3KB          |
-| `locales/mx` | ~0.3KB          |
-| `locales/ar` | ~0.3KB          |
-| `locales/br` | ~0.3KB          |
-| `locales/us` | ~0.3KB          |
-| Full package | ~7.2KB          |
+| `core`       | ~8.8KB          |
+| `locales/*`  | ~0.3KB each     |
+| Full package | ~10.6KB         |
 
 Tree-shaking ensures you only ship what you import.
 

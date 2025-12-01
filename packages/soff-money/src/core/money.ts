@@ -249,6 +249,117 @@ export class Money implements IMoney {
   }
 
   /**
+   * Calculate a percentage of this money
+   * @example money.percentage(10) returns 10% of the amount
+   */
+  percentage(percent: number): Money {
+    return new Money(Math.round((this.cents * percent) / 100), this.currency);
+  }
+
+  /**
+   * Add a percentage to this money
+   * @example money.addPercentage(19) adds 19% (like tax)
+   */
+  addPercentage(percent: number): Money {
+    return this.add(this.percentage(percent));
+  }
+
+  /**
+   * Subtract a percentage from this money
+   * @example money.subtractPercentage(10) subtracts 10% (like discount)
+   */
+  subtractPercentage(percent: number): Money {
+    return this.subtract(this.percentage(percent));
+  }
+
+  /**
+   * Get the minimum of this and another money value
+   */
+  min(other: IMoney): Money {
+    this.assertSameCurrency(other);
+    return this.cents <= other.cents ? this : new Money(other.cents, this.currency);
+  }
+
+  /**
+   * Get the maximum of this and another money value
+   */
+  max(other: IMoney): Money {
+    this.assertSameCurrency(other);
+    return this.cents >= other.cents ? this : new Money(other.cents, this.currency);
+  }
+
+  /**
+   * Clamp this money between a minimum and maximum
+   */
+  clamp(minValue: IMoney, maxValue: IMoney): Money {
+    return this.max(minValue).min(maxValue);
+  }
+
+  /**
+   * Get cents (smallest unit)
+   */
+  toCents(): number {
+    return this.cents;
+  }
+
+  /**
+   * Check if within a range (inclusive)
+   */
+  isBetween(min: IMoney, max: IMoney): boolean {
+    this.assertSameCurrency(min);
+    this.assertSameCurrency(max);
+    return this.cents >= min.cents && this.cents <= max.cents;
+  }
+
+  /**
+   * Sum multiple money values
+   */
+  static sum(values: IMoney[]): Money {
+    if (values.length === 0) {
+      throw new Error('Cannot sum empty array');
+    }
+    const currency = values[0].currency;
+    const total = values.reduce((sum, m) => {
+      if (m.currency.code !== currency.code) {
+        throw new Error('Cannot sum different currencies');
+      }
+      return sum + m.cents;
+    }, 0);
+    return new Money(total, currency);
+  }
+
+  /**
+   * Get the minimum from an array of money values
+   */
+  static minimum(values: IMoney[]): Money {
+    if (values.length === 0) {
+      throw new Error('Cannot get minimum of empty array');
+    }
+    return values.reduce((min, m) => (m.cents < min.cents ? m : min)) as Money;
+  }
+
+  /**
+   * Get the maximum from an array of money values
+   */
+  static maximum(values: IMoney[]): Money {
+    if (values.length === 0) {
+      throw new Error('Cannot get maximum of empty array');
+    }
+    return values.reduce((max, m) => (m.cents > max.cents ? m : max)) as Money;
+  }
+
+  /**
+   * Calculate the average of money values
+   */
+  static average(values: IMoney[]): Money {
+    if (values.length === 0) {
+      throw new Error('Cannot calculate average of empty array');
+    }
+    const total = Money.sum(values);
+    return total.divide(values.length);
+  }
+
+  /**
    * Convert to JSON-serializable object
    */
   toJSON(): { cents: number; currency: string } {
