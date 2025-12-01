@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Calendar, IdCard, Theater, Coins, TreeDeciduous, Package, Globe } from 'lucide-react';
+import { Calendar, IdCard, Theater, Coins, TreeDeciduous, Package, Globe, Map } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import type { LucideIcon } from 'lucide-react';
 
 const iconMap: Record<string, LucideIcon> = {
   'soff-date': Calendar,
+  'soff-geo': Map,
   'soff-id': IdCard,
   'soff-mask': Theater,
   'soff-money': Coins,
@@ -15,6 +16,7 @@ const iconMap: Record<string, LucideIcon> = {
 
 const colorMap: Record<string, string> = {
   'soff-date': 'text-soff-date',
+  'soff-geo': 'text-soff-geo',
   'soff-id': 'text-soff-id',
   'soff-mask': 'text-soff-mask',
   'soff-money': 'text-soff-money',
@@ -22,6 +24,7 @@ const colorMap: Record<string, string> = {
 
 const featuresMap: Record<string, string[]> = {
   'soff-date': ['Zero dependencies', '~3KB per locale', '5 countries'],
+  'soff-geo': ['Comprehensive data', 'Zero dependencies', 'CO & MX support'],
   'soff-id': ['Official algorithms', '<1KB gzipped', '5 countries'],
   'soff-mask': ['Framework agnostic', 'DOM & headless', 'Custom masks'],
   'soff-money': ['Locale-aware', 'Precise decimals', 'Multiple currencies'],
