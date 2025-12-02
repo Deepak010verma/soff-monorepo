@@ -249,11 +249,36 @@ validateCUIT('20-12345678-9');     // true/false`}</CodeBlock>
 
         <Tabs defaultValue="co">
           <TabsList className="flex-wrap">
-            <TabsTrigger value="co">Colombia</TabsTrigger>
-            <TabsTrigger value="br">Brasil</TabsTrigger>
-            <TabsTrigger value="ar">Argentina</TabsTrigger>
-            <TabsTrigger value="cl">Chile</TabsTrigger>
-            <TabsTrigger value="mx">México</TabsTrigger>
+            <TabsTrigger
+              value="co"
+              className="data-[state=active]:bg-soff-id/20 data-[state=active]:text-soff-id"
+            >
+              Colombia
+            </TabsTrigger>
+            <TabsTrigger
+              value="br"
+              className="data-[state=active]:bg-soff-id/20 data-[state=active]:text-soff-id"
+            >
+              Brasil
+            </TabsTrigger>
+            <TabsTrigger
+              value="ar"
+              className="data-[state=active]:bg-soff-id/20 data-[state=active]:text-soff-id"
+            >
+              Argentina
+            </TabsTrigger>
+            <TabsTrigger
+              value="cl"
+              className="data-[state=active]:bg-soff-id/20 data-[state=active]:text-soff-id"
+            >
+              Chile
+            </TabsTrigger>
+            <TabsTrigger
+              value="mx"
+              className="data-[state=active]:bg-soff-id/20 data-[state=active]:text-soff-id"
+            >
+              México
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="co" className="mt-4 space-y-4">

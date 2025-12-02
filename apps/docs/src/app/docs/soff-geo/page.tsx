@@ -182,8 +182,18 @@ const results = searchMunicipalities('medellin');
 
         <Tabs defaultValue="co">
           <TabsList className="flex-wrap">
-            <TabsTrigger value="co">Colombia</TabsTrigger>
-            <TabsTrigger value="mx">México</TabsTrigger>
+            <TabsTrigger
+              value="co"
+              className="data-[state=active]:bg-soff-geo/20 data-[state=active]:text-soff-geo"
+            >
+              Colombia
+            </TabsTrigger>
+            <TabsTrigger
+              value="mx"
+              className="data-[state=active]:bg-soff-geo/20 data-[state=active]:text-soff-geo"
+            >
+              México
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="co" className="mt-4 space-y-4">

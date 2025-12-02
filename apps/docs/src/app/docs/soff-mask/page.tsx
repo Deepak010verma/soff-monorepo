@@ -226,10 +226,30 @@ mask('ABC123', 'AAA-###');           // 'ABC-123'`}</CodeBlock>
 
         <Tabs defaultValue="phone">
           <TabsList>
-            <TabsTrigger value="phone">Phone</TabsTrigger>
-            <TabsTrigger value="documents">Documents</TabsTrigger>
-            <TabsTrigger value="cards">Cards</TabsTrigger>
-            <TabsTrigger value="dates">Dates</TabsTrigger>
+            <TabsTrigger
+              value="phone"
+              className="data-[state=active]:bg-soff-mask/20 data-[state=active]:text-soff-mask"
+            >
+              Phone
+            </TabsTrigger>
+            <TabsTrigger
+              value="documents"
+              className="data-[state=active]:bg-soff-mask/20 data-[state=active]:text-soff-mask"
+            >
+              Documents
+            </TabsTrigger>
+            <TabsTrigger
+              value="cards"
+              className="data-[state=active]:bg-soff-mask/20 data-[state=active]:text-soff-mask"
+            >
+              Cards
+            </TabsTrigger>
+            <TabsTrigger
+              value="dates"
+              className="data-[state=active]:bg-soff-mask/20 data-[state=active]:text-soff-mask"
+            >
+              Dates
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="phone" className="mt-4">

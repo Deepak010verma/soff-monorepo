@@ -70,8 +70,18 @@ export default function SoffPhonePage() {
       <div className="mt-10" id="usage">
         <Tabs defaultValue="co" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="co">Colombia 🇨🇴</TabsTrigger>
-            <TabsTrigger value="mx">Mexico 🇲🇽</TabsTrigger>
+            <TabsTrigger
+              value="co"
+              className="data-[state=active]:bg-soff-phone/20 data-[state=active]:text-soff-phone"
+            >
+              Colombia 🇨🇴
+            </TabsTrigger>
+            <TabsTrigger
+              value="mx"
+              className="data-[state=active]:bg-soff-phone/20 data-[state=active]:text-soff-phone"
+            >
+              Mexico 🇲🇽
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="co" className="mt-6 space-y-6">

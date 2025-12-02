@@ -265,12 +265,42 @@ const shares = Money.fromDecimal(100, USD).distribute(3);
 
         <Tabs defaultValue="creation">
           <TabsList className="flex-wrap">
-            <TabsTrigger value="creation">Creation</TabsTrigger>
-            <TabsTrigger value="arithmetic">Arithmetic</TabsTrigger>
-            <TabsTrigger value="percentage">Percentage</TabsTrigger>
-            <TabsTrigger value="comparison">Comparison</TabsTrigger>
-            <TabsTrigger value="static">Static Methods</TabsTrigger>
-            <TabsTrigger value="formatting">Formatting</TabsTrigger>
+            <TabsTrigger
+              value="creation"
+              className="data-[state=active]:bg-soff-money/20 data-[state=active]:text-soff-money"
+            >
+              Creation
+            </TabsTrigger>
+            <TabsTrigger
+              value="arithmetic"
+              className="data-[state=active]:bg-soff-money/20 data-[state=active]:text-soff-money"
+            >
+              Arithmetic
+            </TabsTrigger>
+            <TabsTrigger
+              value="percentage"
+              className="data-[state=active]:bg-soff-money/20 data-[state=active]:text-soff-money"
+            >
+              Percentage
+            </TabsTrigger>
+            <TabsTrigger
+              value="comparison"
+              className="data-[state=active]:bg-soff-money/20 data-[state=active]:text-soff-money"
+            >
+              Comparison
+            </TabsTrigger>
+            <TabsTrigger
+              value="static"
+              className="data-[state=active]:bg-soff-money/20 data-[state=active]:text-soff-money"
+            >
+              Static Methods
+            </TabsTrigger>
+            <TabsTrigger
+              value="formatting"
+              className="data-[state=active]:bg-soff-money/20 data-[state=active]:text-soff-money"
+            >
+              Formatting
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="creation" className="mt-4">

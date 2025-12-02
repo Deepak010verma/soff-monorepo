@@ -163,10 +163,30 @@ const next = getNextHoliday(new Date());
 
         <Tabs defaultValue="getHolidays">
           <TabsList>
-            <TabsTrigger value="getHolidays">getHolidays</TabsTrigger>
-            <TabsTrigger value="isHoliday">isHoliday</TabsTrigger>
-            <TabsTrigger value="getNextHoliday">getNextHoliday</TabsTrigger>
-            <TabsTrigger value="isBusinessDay">isBusinessDay</TabsTrigger>
+            <TabsTrigger
+              value="getHolidays"
+              className="data-[state=active]:bg-soff-date/20 data-[state=active]:text-soff-date"
+            >
+              getHolidays
+            </TabsTrigger>
+            <TabsTrigger
+              value="isHoliday"
+              className="data-[state=active]:bg-soff-date/20 data-[state=active]:text-soff-date"
+            >
+              isHoliday
+            </TabsTrigger>
+            <TabsTrigger
+              value="getNextHoliday"
+              className="data-[state=active]:bg-soff-date/20 data-[state=active]:text-soff-date"
+            >
+              getNextHoliday
+            </TabsTrigger>
+            <TabsTrigger
+              value="isBusinessDay"
+              className="data-[state=active]:bg-soff-date/20 data-[state=active]:text-soff-date"
+            >
+              isBusinessDay
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="getHolidays" className="mt-4 space-y-4">
