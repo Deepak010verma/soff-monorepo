@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   Calendar,
@@ -10,7 +11,6 @@ import {
   BookOpen,
   Download,
   ExternalLink,
-  Package,
   Map,
   Phone,
 } from 'lucide-react';
@@ -88,15 +88,21 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon" className="border-r">
       <SidebarHeader className="border-b px-4 py-4 transition-all duration-200">
-        <Link href="/" className="flex items-center gap-2">
-          <Package className="size-5 shrink-0" />
-          <span className="text-xl font-bold overflow-hidden whitespace-nowrap transition-all duration-200 group-data-[collapsible=icon]:w-0 group-data-[collapsible=icon]:opacity-0">
-            Soff Libraries
-          </span>
+        <Link href="/" className="flex items-center gap-3">
+          <div className="size-8 shrink-0 rounded-lg bg-linear-to-br from-soff-date to-soff-id p-1.5 shadow-sm">
+            <Image
+              src="https://raw.githubusercontent.com/bledxs/soff-monorepo/master/assets/logo.png"
+              alt="Soff Logo"
+              width={32}
+              height={32}
+              className="w-full h-full object-contain brightness-0 invert"
+            />
+          </div>
+          <div className="overflow-hidden whitespace-nowrap transition-all duration-200 group-data-[collapsible=icon]:w-0 group-data-[collapsible=icon]:opacity-0">
+            <span className="text-lg font-bold">Soff Libraries</span>
+            <p className="text-xs text-muted-foreground">LATAM utilities</p>
+          </div>
         </Link>
-        <p className="text-xs text-muted-foreground overflow-hidden whitespace-nowrap transition-all duration-200 group-data-[collapsible=icon]:h-0 group-data-[collapsible=icon]:opacity-0">
-          LATAM utilities for developers
-        </p>
       </SidebarHeader>
 
       <SidebarContent>

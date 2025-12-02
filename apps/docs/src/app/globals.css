@@ -137,9 +137,11 @@
   /* Library brand colors */
   --soff-brand: oklch(0.75 0.15 195);
   --soff-date: oklch(0.75 0.15 195); /* Cyan/Teal - time, calendar */
+  --soff-geo: oklch(0.68 0.16 240); /* Blue - geography, maps */
   --soff-id: oklch(0.7 0.18 300); /* Violet/Purple - identity, security */
   --soff-mask: oklch(0.75 0.16 75); /* Amber/Orange - masking, transformation */
   --soff-money: oklch(0.72 0.17 155); /* Emerald/Green - money, finance */
+  --soff-phone: oklch(0.72 0.15 330); /* Pink/Rose - communication */
 }
 
 @layer base {
@@ -175,4 +177,153 @@
 
 [data-slot='sidebar'][data-collapsible='icon'] [data-sidebar='menu-badge'] {
   opacity: 0;
+}
+
+/* Modern 2025 effects */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.glass-effect {
+  background: oklch(0.16 0.01 260 / 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Library color gradients */
+.gradient-soff-date {
+  background: linear-gradient(135deg, oklch(0.75 0.15 195), oklch(0.65 0.12 210));
+}
+
+.gradient-soff-geo {
+  background: linear-gradient(135deg, oklch(0.68 0.16 240), oklch(0.58 0.13 255));
+}
+
+.gradient-soff-id {
+  background: linear-gradient(135deg, oklch(0.7 0.18 300), oklch(0.6 0.15 285));
+}
+
+.gradient-soff-mask {
+  background: linear-gradient(135deg, oklch(0.75 0.16 75), oklch(0.65 0.13 60));
+}
+
+.gradient-soff-money {
+  background: linear-gradient(135deg, oklch(0.72 0.17 155), oklch(0.62 0.14 140));
+}
+
+.gradient-soff-phone {
+  background: linear-gradient(135deg, oklch(0.72 0.15 330), oklch(0.62 0.12 345));
+}
+
+/* Glow effects */
+.glow-date {
+  box-shadow: 0 0 20px oklch(0.75 0.15 195 / 0.3);
+}
+
+.glow-geo {
+  box-shadow: 0 0 20px oklch(0.68 0.16 240 / 0.3);
+}
+
+.glow-id {
+  box-shadow: 0 0 20px oklch(0.7 0.18 300 / 0.3);
+}
+
+.glow-mask {
+  box-shadow: 0 0 20px oklch(0.75 0.16 75 / 0.3);
+}
+
+.glow-money {
+  box-shadow: 0 0 20px oklch(0.72 0.17 155 / 0.3);
+}
+
+.glow-phone {
+  box-shadow: 0 0 20px oklch(0.72 0.15 330 / 0.3);
+}
+
+/* Card hover effects */
+.card-hover-effect {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-hover-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, oklch(0.95 0.01 260 / 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.card-hover-effect:hover::before {
+  left: 100%;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-4px);
+}
+
+/* Text gradients */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    135deg,
+    oklch(0.75 0.15 195),
+    oklch(0.7 0.18 300),
+    oklch(0.75 0.16 75)
+  );
+  background-size: 200% 200%;
+}
+
+/* Code block improvements */
+pre {
+  @apply rounded-lg border border-border bg-card p-4 overflow-x-auto;
+}
+
+code {
+  @apply rounded bg-muted px-1.5 py-0.5 text-sm font-mono;
+}
+
+pre code {
+  @apply bg-transparent p-0;
 }
