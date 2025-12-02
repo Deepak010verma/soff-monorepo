@@ -117,8 +117,8 @@ Busca municipios por nombre o código.
 
 | Import       | Tamaño (minified) |
 | ------------ | ----------------- |
-| `locales/co` | ~45KB             |
-| `locales/mx` | ~100KB            |
+| `locales/co` | ~28KB             |
+| `locales/mx` | ~67KB             |
 | Core only    | ~1.2KB            |
 
 Tree-shaking asegura que solo envías lo que importas.
