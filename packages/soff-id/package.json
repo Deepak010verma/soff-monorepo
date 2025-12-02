@@ -152,5 +152,9 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0",
     "vitest": "^4.0.14"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }
