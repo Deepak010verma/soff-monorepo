@@ -5,6 +5,7 @@ import {
   getNextHoliday,
   isBusinessDay,
   businessDays,
+  diffBusinessDays,
 } from '../../src/locales/co';
 import { en } from '../../src/i18n/en';
 
@@ -121,6 +122,12 @@ describe('Colombia locale', () => {
       // (1 enero es festivo)
       const result = businessDays(new Date('2024-12-31'), 1);
       expect(result.toISOString().split('T')[0]).toBe('2025-01-02');
+    });
+
+    it('diffBusinessDays calcula diferencia en días hábiles', () => {
+      // 31 dic 2024 (martes) a 2 enero 2025 (jueves) = 1 día hábil
+      const result = diffBusinessDays(new Date('2024-12-31'), new Date('2025-01-02'));
+      expect(result).toBe(1);
     });
   });
 });

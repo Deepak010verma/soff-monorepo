@@ -5,6 +5,7 @@ import {
   getNextHoliday,
   isBusinessDay,
   businessDays,
+  diffBusinessDays,
 } from '../../src/locales/mx';
 
 describe('Mexico locale', () => {
@@ -83,6 +84,12 @@ describe('Mexico locale', () => {
       // April 30 (Wed) + 1 business day -> May 2 (Fri)
       const result = businessDays(new Date('2025-04-30'), 1);
       expect(result.toISOString().split('T')[0]).toBe('2025-05-02');
+    });
+
+    it('diffBusinessDays calculates difference in business days', () => {
+      // April 30 (Wed) to May 2 (Fri) = 1 business day
+      const result = diffBusinessDays(new Date('2025-04-30'), new Date('2025-05-02'));
+      expect(result).toBe(1);
     });
   });
 });

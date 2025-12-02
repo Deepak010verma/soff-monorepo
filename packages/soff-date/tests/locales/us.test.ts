@@ -5,6 +5,7 @@ import {
   getNextHoliday,
   isBusinessDay,
   businessDays,
+  diffBusinessDays,
 } from '../../src/locales/us';
 import { es } from '../../src/i18n/es';
 
@@ -148,6 +149,12 @@ describe('US locale', () => {
       // July 5 (Sat), 6 (Sun)
       const result = businessDays(new Date('2025-07-03'), 1);
       expect(result.toISOString().split('T')[0]).toBe('2025-07-07');
+    });
+
+    it('diffBusinessDays calculates difference in business days', () => {
+      // July 3 (Thu) to July 7 (Mon) = 1 business day
+      const result = diffBusinessDays(new Date('2025-07-03'), new Date('2025-07-07'));
+      expect(result).toBe(1);
     });
   });
 });

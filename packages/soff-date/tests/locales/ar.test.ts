@@ -5,6 +5,7 @@ import {
   getNextHoliday,
   isBusinessDay,
   businessDays,
+  diffBusinessDays,
 } from '../../src/locales/ar';
 
 describe('Argentina locale', () => {
@@ -75,6 +76,12 @@ describe('Argentina locale', () => {
       // March 22 (Sat), 23 (Sun), 24 (Memory Day)
       const result = businessDays(new Date('2025-03-21'), 1);
       expect(result.toISOString().split('T')[0]).toBe('2025-03-25');
+    });
+
+    it('diffBusinessDays calculates difference in business days', () => {
+      // March 21 (Fri) to March 25 (Tue) = 1 business day
+      const result = diffBusinessDays(new Date('2025-03-21'), new Date('2025-03-25'));
+      expect(result).toBe(1);
     });
   });
 });
