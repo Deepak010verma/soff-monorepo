@@ -42,9 +42,13 @@ export default function SoffMaskPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-3">
-          <Theater size={36} className="text-soff-mask" />
-          <h1 className="text-3xl font-bold">soff-mask</h1>
-          <Badge>v{version}</Badge>
+          <div className="rounded-lg bg-soff-mask/10 p-2">
+            <Theater size={36} className="text-soff-mask" />
+          </div>
+          <h1 className="bg-linear-to-r from-soff-mask to-soff-mask/70 bg-clip-text text-3xl font-bold text-transparent">
+            soff-mask
+          </h1>
+          <Badge className="bg-soff-mask/20 text-soff-mask">v{version}</Badge>
         </div>
         <p className="mt-2 text-lg text-muted-foreground">
           Input masking for forms - Phone numbers, documents, credit cards, dates and more.
@@ -52,7 +56,7 @@ export default function SoffMaskPage() {
       </div>
 
       {/* Live Demo */}
-      <Card>
+      <Card className="border-soff-mask/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Radio size={18} className="text-red-500" /> Live Demo - Try it!

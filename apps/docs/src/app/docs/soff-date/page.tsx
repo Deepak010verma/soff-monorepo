@@ -42,11 +42,15 @@ export default function SoffDatePage() {
         package="soff-date"
       />
       {/* Header */}
-      <div>
+      <div className="mb-8">
         <div className="flex items-center gap-3">
-          <Calendar size={36} className="text-soff-date" />
-          <h1 className="text-3xl font-bold">soff-date</h1>
-          <Badge>v{version}</Badge>
+          <div className="rounded-lg bg-soff-date/10 p-2">
+            <Calendar size={36} className="text-soff-date" />
+          </div>
+          <h1 className="bg-linear-to-r from-soff-date to-soff-date/70 bg-clip-text text-3xl font-bold text-transparent">
+            soff-date
+          </h1>
+          <Badge className="bg-soff-date/20 text-soff-date">v{version}</Badge>
         </div>
         <p className="mt-2 text-lg text-muted-foreground">
           Lightweight, tree-shakeable holiday calculator with algorithmic date computation.
@@ -54,7 +58,7 @@ export default function SoffDatePage() {
       </div>
 
       {/* Live Demo */}
-      <Card>
+      <Card className="border-soff-date/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Radio size={18} className="text-red-500" /> Live Demo

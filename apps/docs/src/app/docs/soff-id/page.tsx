@@ -47,11 +47,15 @@ export default function SoffIdPage() {
         package="soff-id"
       />
       {/* Header */}
-      <div>
+      <div className="mb-8">
         <div className="flex items-center gap-3">
-          <IdCard size={36} className="text-soff-id" />
-          <h1 className="text-3xl font-bold">soff-id</h1>
-          <Badge>v{version}</Badge>
+          <div className="rounded-lg bg-soff-id/10 p-2">
+            <IdCard size={36} className="text-soff-id" />
+          </div>
+          <h1 className="bg-linear-to-r from-soff-id to-soff-id/70 bg-clip-text text-3xl font-bold text-transparent">
+            soff-id
+          </h1>
+          <Badge className="bg-soff-id/20 text-soff-id">v{version}</Badge>
         </div>
         <p className="mt-2 text-lg text-muted-foreground">
           LATAM document validation library - Validate NIT, RUT, CPF, CUIT, and more.
@@ -59,7 +63,7 @@ export default function SoffIdPage() {
       </div>
 
       {/* Live Demo */}
-      <Card>
+      <Card className="border-soff-id/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Radio size={18} className="text-red-500" /> Live Demo - NIT Validator (Colombia)

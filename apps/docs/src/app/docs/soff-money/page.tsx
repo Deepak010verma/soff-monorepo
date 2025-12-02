@@ -50,9 +50,13 @@ export default function SoffMoneyPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-3">
-          <Coins size={36} className="text-soff-money" />
-          <h1 className="text-3xl font-bold">soff-money</h1>
-          <Badge>v{version}</Badge>
+          <div className="rounded-lg bg-soff-money/10 p-2">
+            <Coins size={36} className="text-soff-money" />
+          </div>
+          <h1 className="bg-linear-to-r from-soff-money to-soff-money/70 bg-clip-text text-3xl font-bold text-transparent">
+            soff-money
+          </h1>
+          <Badge className="bg-soff-money/20 text-soff-money">v{version}</Badge>
         </div>
         <p className="mt-2 text-lg text-muted-foreground">
           Immutable money class with precise arithmetic for LATAM currencies.
@@ -60,7 +64,7 @@ export default function SoffMoneyPage() {
       </div>
 
       {/* Live Demo */}
-      <Card>
+      <Card className="border-soff-money/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Radio size={18} className="text-red-500" /> Live Demo - Money Calculator

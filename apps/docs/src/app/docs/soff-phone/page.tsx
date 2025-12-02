@@ -45,7 +45,7 @@ export default function SoffPhonePage() {
       />
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
-          <h1 className="inline-block font-heading text-4xl tracking-tight lg:text-5xl">
+          <h1 className="bg-linear-to-r from-soff-phone to-soff-phone/70 bg-clip-text inline-block font-heading text-4xl tracking-tight text-transparent lg:text-5xl">
             soff-phone
           </h1>
           <p className="text-xl text-muted-foreground">
@@ -53,9 +53,7 @@ export default function SoffPhonePage() {
           </p>
         </div>
         <div className="flex items-center space-x-2">
-          <Badge variant="secondary" className="text-sm">
-            v0.0.1
-          </Badge>
+          <Badge className="bg-soff-phone/20 text-sm text-soff-phone">v0.0.1</Badge>
           <Badge variant="outline" className="text-sm">
             ~0.5KB Core
           </Badge>
@@ -65,7 +63,7 @@ export default function SoffPhonePage() {
       <hr className="my-8" />
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Card id="features">
+        <Card id="features" className="border-soff-phone/20">
           <CardHeader>
             <CardTitle>Features</CardTitle>
             <CardDescription>Why use soff-phone?</CardDescription>

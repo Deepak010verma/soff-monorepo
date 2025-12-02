@@ -49,11 +49,15 @@ export default function SoffGeoPage() {
         }}
       />
       {/* Header */}
-      <div>
+      <div className="mb-8">
         <div className="flex items-center gap-3">
-          <Map size={36} className="text-soff-geo" />
-          <h1 className="text-3xl font-bold">soff-geo</h1>
-          <Badge>v{version}</Badge>
+          <div className="rounded-lg bg-soff-geo/10 p-2">
+            <Map size={36} className="text-soff-geo" />
+          </div>
+          <h1 className="bg-linear-to-r from-soff-geo to-soff-geo/70 bg-clip-text text-3xl font-bold text-transparent">
+            soff-geo
+          </h1>
+          <Badge className="bg-soff-geo/20 text-soff-geo">v{version}</Badge>
         </div>
         <p className="mt-2 text-lg text-muted-foreground">
           Lightweight geographic data library for LATAM - Departments, municipalities, postal codes
@@ -62,7 +66,7 @@ export default function SoffGeoPage() {
       </div>
 
       {/* Live Demo */}
-      <Card>
+      <Card className="border-soff-geo/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Radio size={18} className="text-red-500" /> Live Demo - Municipality Search
