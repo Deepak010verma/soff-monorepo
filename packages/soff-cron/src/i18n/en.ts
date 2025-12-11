@@ -61,8 +61,8 @@ export const en: I18nStrings = {
   noon: 'noon',
 
   // Special
-  weekday: 'weekday',
-  weekend: 'weekend',
+  weekday: 'weekdays',
+  weekend: 'weekends',
 };
 
 /**

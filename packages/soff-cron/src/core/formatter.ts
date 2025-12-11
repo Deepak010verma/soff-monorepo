@@ -286,12 +286,12 @@ function formatDaysOfWeek(days: number[], i18n: I18nStrings, verbose: boolean): 
     days.includes(4) &&
     days.includes(5)
   ) {
-    return i18n.weekday + 's';
+    return i18n.weekday;
   }
 
   // Check for weekend
   if (days.length === 2 && days.includes(0) && days.includes(6)) {
-    return i18n.weekend + 's';
+    return i18n.weekend;
   }
 
   if (days.length === 1) {

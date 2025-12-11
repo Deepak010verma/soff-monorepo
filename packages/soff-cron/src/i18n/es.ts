@@ -125,8 +125,8 @@ export const es: I18nStrings = {
   noon: 'mediodía',
 
   // Special
-  weekday: 'día de semana',
-  weekend: 'fin de semana',
+  weekday: 'días de semana',
+  weekend: 'fines de semana',
 };
 
 import type { HumanizerPatterns } from './en.js';
