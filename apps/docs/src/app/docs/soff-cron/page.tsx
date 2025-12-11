@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { CodeBlock } from '@/components/code-block';
-import { validateCron, formatCron } from 'soff-cron';
+import { validateCron, formatCron, humanizeCron } from 'soff-cron';
 import { CronFormatter } from './cron-formatter';
 import { getVersion } from '@/lib/versions';
 import { JsonLd } from '@/components/json-ld';
@@ -27,11 +27,22 @@ function getCronExamples() {
       formatted: formatCron(ex.expr, { locale: ex.locale }),
       isValid: validateCron(ex.expr).isValid,
     })),
+    humanizeExamples: [
+      { text: 'every 5 minutes', locale: 'en' as const },
+      { text: 'todos los días a las 2 am', locale: 'es' as const },
+      { text: 'weekdays at 9am', locale: 'en' as const },
+      { text: 'cada lunes a las 10am', locale: 'es' as const },
+      { text: 'every monday', locale: 'en' as const },
+      { text: 'fines de semana a las 10am', locale: 'es' as const },
+    ].map((ex) => ({
+      ...ex,
+      result: humanizeCron(ex.text, { locale: ex.locale }),
+    })),
   };
 }
 
 export default function SoffCronPage() {
-  const { examples } = getCronExamples();
+  const { examples, humanizeExamples } = getCronExamples();
   const version = getVersion('soff-cron');
 
   return (
@@ -54,7 +65,8 @@ export default function SoffCronPage() {
           <Badge variant="outline">~2KB Core</Badge>
         </div>
         <p className="mt-2 text-lg text-muted-foreground">
-          Lightweight, tree-shakeable cron expression parser and human-readable formatter.
+          Lightweight, tree-shakeable cron expression parser and human-readable formatter. Convert
+          between cron expressions and natural language - perfect for non-technical users!
         </p>
       </div>
 
@@ -71,24 +83,57 @@ export default function SoffCronPage() {
       </Card>
 
       {/* Examples */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Format Examples</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {examples.map((ex, idx) => (
-              <div key={idx} className="rounded-lg bg-muted p-4">
-                <p className="text-sm font-mono text-muted-foreground">{ex.expr}</p>
-                <p className="mt-2 text-sm font-semibold">{ex.formatted}</p>
-                <Badge variant="outline" className="mt-2 text-xs">
-                  {ex.locale}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>Natural Language → Cron</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              {humanizeExamples.map((ex, idx) => (
+                <div key={idx} className="rounded-lg border bg-card p-3">
+                  <p className="text-sm text-muted-foreground">&quot;{ex.text}&quot;</p>
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="text-xl">→</span>
+                    {ex.result.success ? (
+                      <code className="rounded bg-muted px-2 py-1 text-sm font-mono">
+                        {ex.result.cronExpression}
+                      </code>
+                    ) : (
+                      <span className="text-sm text-destructive">Failed</span>
+                    )}
+                  </div>
+                  <Badge variant="outline" className="mt-2 text-xs">
+                    {ex.locale}
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Cron → Human Readable</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              {examples.map((ex, idx) => (
+                <div key={idx} className="rounded-lg border bg-card p-3">
+                  <code className="text-sm font-mono text-muted-foreground">{ex.expr}</code>
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="text-xl">→</span>
+                    <p className="text-sm font-semibold">{ex.formatted}</p>
+                  </div>
+                  <Badge variant="outline" className="mt-2 text-xs">
+                    {ex.locale}
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       <Separator />
 
@@ -101,12 +146,62 @@ export default function SoffCronPage() {
       {/* Quick Start */}
       <section id="quick-start">
         <h2 className="mb-4 text-2xl font-semibold">Quick Start</h2>
-        <Tabs defaultValue="format" className="w-full">
+        <Tabs defaultValue="humanize" className="w-full">
           <TabsList>
+            <TabsTrigger value="humanize">Humanize</TabsTrigger>
             <TabsTrigger value="format">Format</TabsTrigger>
             <TabsTrigger value="validate">Validate</TabsTrigger>
             <TabsTrigger value="parse">Parse</TabsTrigger>
           </TabsList>
+          <TabsContent value="humanize">
+            <CodeBlock
+              code={`import { humanizeCron } from 'soff-cron';
+
+// Convert natural language to cron expressions
+humanizeCron('every 5 minutes', { locale: 'en' });
+// → { success: true, cronExpression: "*/5 * * * *" }
+
+humanizeCron('todos los días a las 2 am', { locale: 'es' });
+// → { success: true, cronExpression: "0 2 * * *" }
+
+humanizeCron('every monday at 10am', { locale: 'en' });
+// → { success: true, cronExpression: "0 10 * * 1" }
+
+humanizeCron('días de semana a las 9am', { locale: 'es' });
+// → { success: true, cronExpression: "0 9 * * 1-5" }
+
+// Error handling with suggestions
+humanizeCron('invalid text', { locale: 'en' });
+// → {
+//   success: false,
+//   error: "Could not parse...",
+//   suggestions: ["every 5 minutes", "every day at 9 am"]
+// }`}
+            >
+              {`import { humanizeCron } from 'soff-cron';
+
+// Convert natural language to cron expressions
+humanizeCron('every 5 minutes', { locale: 'en' });
+// → { success: true, cronExpression: "*/5 * * * *" }
+
+humanizeCron('todos los días a las 2 am', { locale: 'es' });
+// → { success: true, cronExpression: "0 2 * * *" }
+
+humanizeCron('every monday at 10am', { locale: 'en' });
+// → { success: true, cronExpression: "0 10 * * 1" }
+
+humanizeCron('días de semana a las 9am', { locale: 'es' });
+// → { success: true, cronExpression: "0 9 * * 1-5" }
+
+// Error handling with suggestions
+humanizeCron('invalid text', { locale: 'en' });
+// → {
+//   success: false,
+//   error: "Could not parse...",
+//   suggestions: ["every 5 minutes", "every day at 9 am"]
+// }`}
+            </CodeBlock>
+          </TabsContent>
           <TabsContent value="format">
             <CodeBlock
               code={`import { formatCron } from 'soff-cron';
@@ -221,6 +316,17 @@ console.log(special.specialKeyword); // '@hourly'`}
         <div className="grid gap-4 sm:grid-cols-2">
           <Card>
             <CardHeader>
+              <CardTitle className="text-lg">🗣️ Natural Language</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                Convert human-readable text like &quot;every 5 minutes&quot; to cron expressions.
+                Perfect for non-technical users!
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
               <CardTitle className="text-lg">🌍 Internationalization</CardTitle>
             </CardHeader>
             <CardContent>
@@ -256,6 +362,16 @@ console.log(special.specialKeyword); // '@hourly'`}
             <CardContent>
               <p className="text-sm text-muted-foreground">
                 @yearly, @monthly, @weekly, @daily, @hourly, @midnight shortcuts.
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">💡 Smart Suggestions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                Get helpful suggestions when natural language text cannot be parsed.
               </p>
             </CardContent>
           </Card>
@@ -331,6 +447,69 @@ console.log(special.specialKeyword); // '@hourly'`}
       <section id="api">
         <h2 className="mb-4 text-2xl font-semibold">API Reference</h2>
         <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="font-mono text-lg">humanizeCron() ✨ NEW</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <CodeBlock
+                code={`humanizeCron(text: string, options?: HumanizerOptions): HumanizerResult
+
+interface HumanizerOptions {
+  locale?: 'en' | 'es';           // Default: 'en'
+}
+
+interface HumanizerResult {
+  success: boolean;
+  cronExpression?: string;
+  error?: string;
+  suggestions?: string[];
+}
+
+// Supported patterns (English):
+// - Time intervals: "every minute", "every 5 minutes", "every 2 hours"
+// - Daily: "every day", "every day at 2am", "at 14:30"
+// - Weekly: "every week", "every monday", "every monday at 10am"
+// - Monthly: "every month", "on the 1st of every month"
+// - Weekdays: "weekdays at 9am", "weekends at 10am"
+
+// Patrones soportados (Español):
+// - Intervalos: "cada minuto", "cada 5 minutos", "cada 2 horas"
+// - Diario: "todos los días", "todos los días a las 2am", "a las 14:30"
+// - Semanal: "cada semana", "todos los lunes", "cada lunes a las 10am"
+// - Mensual: "cada mes", "el día 1 de cada mes"
+// - Días laborales: "días de semana a las 9am", "fines de semana a las 10am"`}
+              >
+                {`humanizeCron(text: string, options?: HumanizerOptions): HumanizerResult
+
+interface HumanizerOptions {
+  locale?: 'en' | 'es';           // Default: 'en'
+}
+
+interface HumanizerResult {
+  success: boolean;
+  cronExpression?: string;
+  error?: string;
+  suggestions?: string[];
+}
+
+// Supported patterns (English):
+// - Time intervals: "every minute", "every 5 minutes", "every 2 hours"
+// - Daily: "every day", "every day at 2am", "at 14:30"
+// - Weekly: "every week", "every monday", "every monday at 10am"
+// - Monthly: "every month", "on the 1st of every month"
+// - Weekdays: "weekdays at 9am", "weekends at 10am"
+
+// Patrones soportados (Español):
+// - Intervalos: "cada minuto", "cada 5 minutos", "cada 2 horas"
+// - Diario: "todos los días", "todos los días a las 2am", "a las 14:30"
+// - Semanal: "cada semana", "todos los lunes", "cada lunes a las 10am"
+// - Mensual: "cada mes", "el día 1 de cada mes"
+// - Días laborales: "días de semana a las 9am", "fines de semana a las 10am"`}
+              </CodeBlock>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle className="font-mono text-lg">formatCron()</CardTitle>

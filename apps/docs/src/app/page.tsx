@@ -61,7 +61,7 @@ const glowMap: Record<string, string> = {
 };
 
 const featuresMap: Record<string, string[]> = {
-  'soff-cron': ['Human-readable', 'i18n support', 'Zero dependencies'],
+  'soff-cron': ['Human-readable', 'Natural language', 'i18n support'],
   'soff-date': ['Zero dependencies', '~3KB per locale', '5 countries'],
   'soff-geo': ['Comprehensive data', 'Zero dependencies', 'CO & MX support'],
   'soff-id': ['Official algorithms', '<1KB gzipped', '5 countries'],
