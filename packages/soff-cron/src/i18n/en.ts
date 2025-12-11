@@ -1,0 +1,65 @@
+import type { I18nStrings } from './es.js';
+
+export const en: I18nStrings = {
+  at: 'at',
+  every: 'every',
+  everyMinute: 'every minute',
+  everyHour: 'every hour',
+  everyDay: 'every day',
+  everyWeek: 'every week',
+  everyMonth: 'every month',
+  everyYear: 'every year',
+  minute: 'minute',
+  minutes: 'minutes',
+  hour: 'hour',
+  hours: 'hours',
+  day: 'day',
+  days: 'days',
+  week: 'week',
+  weeks: 'weeks',
+  month: 'month',
+  months: 'months',
+  year: 'year',
+  years: 'years',
+  on: 'on',
+  in: 'in',
+  and: 'and',
+  between: 'between',
+  through: 'through',
+  of: 'of',
+  second: 'second',
+  seconds: 'seconds',
+
+  // Day names
+  sunday: 'Sunday',
+  monday: 'Monday',
+  tuesday: 'Tuesday',
+  wednesday: 'Wednesday',
+  thursday: 'Thursday',
+  friday: 'Friday',
+  saturday: 'Saturday',
+
+  // Month names
+  january: 'January',
+  february: 'February',
+  march: 'March',
+  april: 'April',
+  may: 'May',
+  june: 'June',
+  july: 'July',
+  august: 'August',
+  september: 'September',
+  october: 'October',
+  november: 'November',
+  december: 'December',
+
+  // Time periods
+  am: 'AM',
+  pm: 'PM',
+  midnight: 'midnight',
+  noon: 'noon',
+
+  // Special
+  weekday: 'weekday',
+  weekend: 'weekend',
+};

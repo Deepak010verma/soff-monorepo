@@ -21,6 +21,7 @@
 
 | Package                             | Version                                                                                     | Size (gzip)                   | Description                                             |
 | ----------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------- | ------------------------------------------------------- |
+| [soff-cron](./packages/soff-cron)   | [![npm](https://img.shields.io/npm/v/soff-cron)](https://www.npmjs.com/package/soff-cron)   | ~2KB (Core) / ~3KB (i18n)     | Cron expression parser and human-readable formatter     |
 | [soff-date](./packages/soff-date)   | [![npm](https://img.shields.io/npm/v/soff-date)](https://www.npmjs.com/package/soff-date)   | ~2KB (Core) / ~4KB (Loc)      | Holiday calculator with algorithmic date computation    |
 | [soff-geo](./packages/soff-geo)     | [![npm](https://img.shields.io/npm/v/soff-geo)](https://www.npmjs.com/package/soff-geo)     | ~1KB (Core) / ~45-100KB (Loc) | Geographic data for LATAM (Departments, Municipalities) |
 | [soff-id](./packages/soff-id)       | [![npm](https://img.shields.io/npm/v/soff-id)](https://www.npmjs.com/package/soff-id)       | ~0.5KB (Core) / ~1KB (Loc)    | ID document validation for LATAM countries              |
@@ -83,16 +84,32 @@ Built specifically for Latin American business requirements and regulations.
 
 ```bash
 # Install individual packages
-npm install soff-date soff-id soff-mask soff-money
+npm install soff-cron soff-date soff-id soff-mask soff-money
 
 # Or with pnpm
-pnpm add soff-date soff-id soff-mask soff-money
+pnpm add soff-cron soff-date soff-id soff-mask soff-money
 
 # Or with yarn
-yarn add soff-date soff-id soff-mask soff-money
+yarn add soff-cron soff-date soff-id soff-mask soff-money
 ```
 
 ### 📚 Usage Examples
+
+### soff-cron
+
+```typescript
+import { formatCron, validateCron, parseCron } from 'soff-cron';
+
+// Format cron to human-readable text
+formatCron('0 9 * * 1-5', { locale: 'en' }); // → 'At 09:00, Monday through Friday'
+formatCron('*/15 * * * *', { locale: 'es' }); // → 'Cada 15 minutos'
+
+// Validate cron expression
+validateCron('0 0 * * *'); // → { isValid: true }
+
+// Parse cron to structured data
+parseCron('0 9-17 * * 1-5'); // → { minute: {...}, hour: {...}, ... }
+```
 
 ### soff-date
 
