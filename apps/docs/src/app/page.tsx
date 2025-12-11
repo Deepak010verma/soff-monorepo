@@ -122,7 +122,7 @@ export default function HomePage() {
       <section className="mb-20">
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="glass-effect rounded-xl border border-border/50 p-6 text-center">
-            <div className="text-3xl font-bold text-primary mb-2">6</div>
+            <div className="text-3xl font-bold text-primary mb-2">{libraryData.length}</div>
             <div className="text-sm text-muted-foreground">Libraries</div>
           </div>
           <div className="glass-effect rounded-xl border border-border/50 p-6 text-center">
