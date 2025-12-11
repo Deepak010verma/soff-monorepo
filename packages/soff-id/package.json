@@ -142,16 +142,16 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@soff/tsconfig": "*",
-    "@vitest/coverage-v8": "^4.0.14",
+    "@vitest/coverage-v8": "^4.0.15",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.5.0",
-    "prettier": "^3.7.3",
-    "rimraf": "^6.0.1",
+    "prettier": "^3.7.4",
+    "rimraf": "^6.1.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.48.0",
-    "vitest": "^4.0.14"
+    "typescript-eslint": "^8.49.0",
+    "vitest": "^4.0.15"
   },
   "publishConfig": {
     "access": "public",
