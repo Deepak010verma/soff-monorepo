@@ -1,7 +1,7 @@
 {
   "name": "soff-phone",
   "version": "0.0.1",
-  "description": "Lightweight phone number validation and formatting library for LATAM",
+  "description": "Lightweight phone number validation and formatting library for global markets",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -18,6 +18,46 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./ar": {
+      "import": {
+        "types": "./dist/locales/ar.d.ts",
+        "default": "./dist/locales/ar.js"
+      },
+      "require": {
+        "types": "./dist/locales/ar.d.cts",
+        "default": "./dist/locales/ar.cjs"
+      }
+    },
+    "./br": {
+      "import": {
+        "types": "./dist/locales/br.d.ts",
+        "default": "./dist/locales/br.js"
+      },
+      "require": {
+        "types": "./dist/locales/br.d.cts",
+        "default": "./dist/locales/br.cjs"
+      }
+    },
+    "./ca": {
+      "import": {
+        "types": "./dist/locales/ca.d.ts",
+        "default": "./dist/locales/ca.js"
+      },
+      "require": {
+        "types": "./dist/locales/ca.d.cts",
+        "default": "./dist/locales/ca.cjs"
+      }
+    },
+    "./cl": {
+      "import": {
+        "types": "./dist/locales/cl.d.ts",
+        "default": "./dist/locales/cl.js"
+      },
+      "require": {
+        "types": "./dist/locales/cl.d.cts",
+        "default": "./dist/locales/cl.cjs"
+      }
+    },
     "./co": {
       "import": {
         "types": "./dist/locales/co.d.ts",
@@ -28,6 +68,86 @@
         "default": "./dist/locales/co.cjs"
       }
     },
+    "./cr": {
+      "import": {
+        "types": "./dist/locales/cr.d.ts",
+        "default": "./dist/locales/cr.js"
+      },
+      "require": {
+        "types": "./dist/locales/cr.d.cts",
+        "default": "./dist/locales/cr.cjs"
+      }
+    },
+    "./de": {
+      "import": {
+        "types": "./dist/locales/de.d.ts",
+        "default": "./dist/locales/de.js"
+      },
+      "require": {
+        "types": "./dist/locales/de.d.cts",
+        "default": "./dist/locales/de.cjs"
+      }
+    },
+    "./ec": {
+      "import": {
+        "types": "./dist/locales/ec.d.ts",
+        "default": "./dist/locales/ec.js"
+      },
+      "require": {
+        "types": "./dist/locales/ec.d.cts",
+        "default": "./dist/locales/ec.cjs"
+      }
+    },
+    "./es": {
+      "import": {
+        "types": "./dist/locales/es.d.ts",
+        "default": "./dist/locales/es.js"
+      },
+      "require": {
+        "types": "./dist/locales/es.d.cts",
+        "default": "./dist/locales/es.cjs"
+      }
+    },
+    "./fr": {
+      "import": {
+        "types": "./dist/locales/fr.d.ts",
+        "default": "./dist/locales/fr.js"
+      },
+      "require": {
+        "types": "./dist/locales/fr.d.cts",
+        "default": "./dist/locales/fr.cjs"
+      }
+    },
+    "./gb": {
+      "import": {
+        "types": "./dist/locales/gb.d.ts",
+        "default": "./dist/locales/gb.js"
+      },
+      "require": {
+        "types": "./dist/locales/gb.d.cts",
+        "default": "./dist/locales/gb.cjs"
+      }
+    },
+    "./gt": {
+      "import": {
+        "types": "./dist/locales/gt.d.ts",
+        "default": "./dist/locales/gt.js"
+      },
+      "require": {
+        "types": "./dist/locales/gt.d.cts",
+        "default": "./dist/locales/gt.cjs"
+      }
+    },
+    "./it": {
+      "import": {
+        "types": "./dist/locales/it.d.ts",
+        "default": "./dist/locales/it.js"
+      },
+      "require": {
+        "types": "./dist/locales/it.d.cts",
+        "default": "./dist/locales/it.cjs"
+      }
+    },
     "./mx": {
       "import": {
         "types": "./dist/locales/mx.d.ts",
@@ -36,6 +156,46 @@
       "require": {
         "types": "./dist/locales/mx.d.cts",
         "default": "./dist/locales/mx.cjs"
+      }
+    },
+    "./pa": {
+      "import": {
+        "types": "./dist/locales/pa.d.ts",
+        "default": "./dist/locales/pa.js"
+      },
+      "require": {
+        "types": "./dist/locales/pa.d.cts",
+        "default": "./dist/locales/pa.cjs"
+      }
+    },
+    "./pe": {
+      "import": {
+        "types": "./dist/locales/pe.d.ts",
+        "default": "./dist/locales/pe.js"
+      },
+      "require": {
+        "types": "./dist/locales/pe.d.cts",
+        "default": "./dist/locales/pe.cjs"
+      }
+    },
+    "./us": {
+      "import": {
+        "types": "./dist/locales/us.d.ts",
+        "default": "./dist/locales/us.js"
+      },
+      "require": {
+        "types": "./dist/locales/us.d.cts",
+        "default": "./dist/locales/us.cjs"
+      }
+    },
+    "./ve": {
+      "import": {
+        "types": "./dist/locales/ve.d.ts",
+        "default": "./dist/locales/ve.js"
+      },
+      "require": {
+        "types": "./dist/locales/ve.d.cts",
+        "default": "./dist/locales/ve.cjs"
       }
     }
   },
@@ -67,9 +227,28 @@
     "phone",
     "validation",
     "formatting",
+    "international",
+    "argentina",
+    "brazil",
+    "canada",
+    "chile",
     "colombia",
+    "costa-rica",
+    "ecuador",
+    "france",
+    "germany",
+    "guatemala",
+    "italy",
     "mexico",
+    "panama",
+    "peru",
+    "spain",
+    "united-kingdom",
+    "united-states",
+    "venezuela",
     "latam",
+    "europe",
+    "north-america",
     "typescript",
     "tree-shaking",
     "lightweight"
