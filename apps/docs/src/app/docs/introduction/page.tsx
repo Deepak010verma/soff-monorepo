@@ -1,7 +1,18 @@
-import { Calendar, IdCard, Theater, Coins, MapPin, Phone, Sparkles, Target } from 'lucide-react';
+import {
+  Calendar,
+  IdCard,
+  Theater,
+  Coins,
+  MapPin,
+  Phone,
+  Sparkles,
+  Target,
+  Clock,
+} from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { versions } from '@/lib/versions';
 
 export const metadata = {
   title: 'Introduction - Soff Libraries',
@@ -97,16 +108,18 @@ export default function IntroductionPage() {
 
       <div className="not-prose grid gap-4 md:grid-cols-2">
         <Link href="/docs/soff-cron" className="group">
-          <Card className="h-full glass-effect border-soff-mask/20 transition-all hover:border-soff-mask/40 hover:shadow-lg hover:shadow-soff-mask/10">
+          <Card className="h-full glass-effect border-soff-cron/20 transition-all hover:border-soff-cron/40 hover:shadow-lg hover:shadow-soff-cron/10">
             <CardHeader>
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-soff-mask/10 p-2 transition-all group-hover:bg-soff-mask/20">
-                  <Theater size={24} className="text-soff-mask" />
+                <div className="rounded-lg bg-soff-cron/10 p-2 transition-all group-hover:bg-soff-cron/20">
+                  <Clock size={24} className="text-soff-cron" />
                 </div>
                 <div className="flex-1">
                   <CardTitle className="flex items-center gap-2">
                     soff-cron
-                    <Badge className="bg-soff-mask/20 text-soff-mask">v0.1.0</Badge>
+                    <Badge className="bg-soff-cron/20 text-soff-cron">
+                      v{versions['soff-cron']}
+                    </Badge>
                   </CardTitle>
                 </div>
               </div>
@@ -129,7 +142,9 @@ export default function IntroductionPage() {
                 <div className="flex-1">
                   <CardTitle className="flex items-center gap-2">
                     soff-date
-                    <Badge className="bg-soff-date/20 text-soff-date">v0.2.0</Badge>
+                    <Badge className="bg-soff-date/20 text-soff-date">
+                      v{versions['soff-date']}
+                    </Badge>
                   </CardTitle>
                 </div>
               </div>
@@ -153,7 +168,7 @@ export default function IntroductionPage() {
                 <div className="flex-1">
                   <CardTitle className="flex items-center gap-2">
                     soff-geo
-                    <Badge className="bg-soff-geo/20 text-soff-geo">v0.1.0</Badge>
+                    <Badge className="bg-soff-geo/20 text-soff-geo">v{versions['soff-geo']}</Badge>
                   </CardTitle>
                 </div>
               </div>
@@ -176,7 +191,7 @@ export default function IntroductionPage() {
                 <div className="flex-1">
                   <CardTitle className="flex items-center gap-2">
                     soff-id
-                    <Badge className="bg-soff-id/20 text-soff-id">v0.1.0</Badge>
+                    <Badge className="bg-soff-id/20 text-soff-id">v{versions['soff-id']}</Badge>
                   </CardTitle>
                 </div>
               </div>
@@ -199,7 +214,9 @@ export default function IntroductionPage() {
                 <div className="flex-1">
                   <CardTitle className="flex items-center gap-2">
                     soff-mask
-                    <Badge className="bg-soff-mask/20 text-soff-mask">v0.1.0</Badge>
+                    <Badge className="bg-soff-mask/20 text-soff-mask">
+                      v{versions['soff-mask']}
+                    </Badge>
                   </CardTitle>
                 </div>
               </div>
@@ -222,7 +239,9 @@ export default function IntroductionPage() {
                 <div className="flex-1">
                   <CardTitle className="flex items-center gap-2">
                     soff-money
-                    <Badge className="bg-soff-money/20 text-soff-money">v0.1.0</Badge>
+                    <Badge className="bg-soff-money/20 text-soff-money">
+                      v{versions['soff-money']}
+                    </Badge>
                   </CardTitle>
                 </div>
               </div>
@@ -245,7 +264,9 @@ export default function IntroductionPage() {
                 <div className="flex-1">
                   <CardTitle className="flex items-center gap-2">
                     soff-phone
-                    <Badge className="bg-soff-phone/20 text-soff-phone">v0.1.0</Badge>
+                    <Badge className="bg-soff-phone/20 text-soff-phone">
+                      v{versions['soff-phone']}
+                    </Badge>
                   </CardTitle>
                 </div>
               </div>
