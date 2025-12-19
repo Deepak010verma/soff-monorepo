@@ -1,6 +1,6 @@
 {
   "name": "soff-cron",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Lightweight, tree-shakeable cron expression parser and human-readable formatter",
   "type": "module",
   "main": "./dist/index.cjs",
