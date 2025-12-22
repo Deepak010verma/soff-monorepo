@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.7
+
+### Patch Changes
+
+- [#38](https://github.com/bledxs/soff-monorepo/pull/38) [`de20aed`](https://github.com/bledxs/soff-monorepo/commit/de20aed9f2366a717eedbf98eb37d5c1c7f6f352) Thanks [@github-actions](https://github.com/apps/github-actions)! - Merge pull request #37 from bledxs/dependabot/npm_and_yarn/minor-and-patch-4366035450
+
 ## 1.0.6
 
 ### Patch Changes
